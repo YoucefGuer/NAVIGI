@@ -248,7 +248,6 @@ a:focus {
 
 .information_section .information_container {
   color: #fefefe;
-  background-color: #000000;
   background-color: var(--primary-clr-);
   padding: 25px;
   border-radius: 15px;
@@ -832,3 +831,7 @@ form {
 }
 
 /* End Contact Page */
+/* start worker section */
+.worker-section {
+  margin: 80px 30px 50px 10px;
+}
