@@ -1,9 +1,9 @@
-@media (max-width: 1120px) {
-    .saving_section .detail-box {
-        padding: 0;
-    }
-   
-}
+
+:root {
+    --primary-clr-: #2959ac;
+    --secondary-clr-: #081d42;
+    --whiter-clr-: #e6ebf2;
+  }
 
 @media (max-width: 992px) {
     
@@ -11,7 +11,6 @@
         justify-content: center;
         margin-left: 0;
         margin-top: 10px;
-
     }
     .col-image {
         display: none;
@@ -24,51 +23,13 @@
         align-items: center;
     }
 
-    #navbarSupportedContent .navbar-nav .nav-link {
-        margin: 5px 0;
-    }
-
     .logo-header{
         display: none;
     }
-
-    .slider_section .detail-box {
-        padding-left: 0;
-    }
-
-    .slider_section .detail-box h1 {
-        font-size: 3rem;
-    }
-
-    .slider_section .img-box {
-        padding: 0;
-    }
-
-    .saving_section .row {
-        flex-direction: column-reverse;
-    }
-
-    .saving_section .detail-box {
-
-        margin-bottom: 30px;
-    }
-
-    .client_section .box {
-        margin: 15px 25px;
-    }
-
-    .client_section .carousel_btn-box {
-        display: flex;
-        justify-content: center;
-        margin-top: 45px;
-    }
-
-    .client_section .carousel-control-prev,
-    .client_section .carousel-control-next {
-        position: unset;
-        margin: 0 2.5px;
-        width: 45px;
-        height: 45px;
+    .fix-top{
+        background-color: var(--whiter-clr-);
+        margin: 5px;
+        border-radius: 15px;
     }
     
 }
@@ -80,35 +41,10 @@
     #navbarSupportedContent {
         display: flex;
         justify-content: space-between;
-        padding-left: 5%;
-        padding-right: 5%;
         }
 }
 
 @media (max-width: 768px) {
-    .hero_area {
-        padding: 0 25px;
-    }
-    
-
-    .slider_section .img-box {
-        margin-bottom: 45px;
-    }
-
-    .saving_section,
-    .gift_section {
-        padding-left: 25px;
-        padding-right: 25px;
-    }
-
-    .gift_section .box {
-        padding: 45px 0;
-    }
-
-    .gift_section .img-box {
-        padding: 0 15px;
-        margin-bottom: 45px;
-    }
 
     .info_section .row>div {
         text-align: center;
@@ -126,9 +62,13 @@
       margin: 0 10px;
     }
     .swiper-navBtn{
-      display: none;
+        display: none;
     }
-    
+    .fix-top{
+        background-color: var(--whiter-clr-);
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+    }
 }
 
 @media (max-width: 576px) {
@@ -137,14 +77,11 @@
         padding-right: 25px;
     }
     
+    
 }
 
 @media (max-width: 480px) {
 
-    .saving_section .detail-box,
-    .gift_section .detail-box {
-        padding: 0 5px;
-    }
     .navbar-brand{
         display: none;
     } 
@@ -175,5 +112,4 @@
     margin: 20px;
     }
 
-    
 }

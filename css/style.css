@@ -88,8 +88,7 @@ body {
   background-color: var(--whiter-clr-);
   justify-content: center;
   padding: 10px 0;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
+  border-radius: 15px;
   margin: 0 20px 20px 20px;
 }
 
@@ -153,34 +152,28 @@ a:focus {
 }
 
 .navbar-brand span {
-  font-size: 28px;
+  font-size: 24px;
   font-weight: bold;
-  color: #000000;
+  color: var(--secondary-clr-);
   text-transform: uppercase;
   margin: 0;
   padding: 0;
 }
 
-.custom_nav-container .nav_search-btn {
-  padding: 0;
-  border: none;
-}
 
 .custom_nav-container {
   z-index: 99999;
-  padding: 0;
+  padding: 10px;
   flex-direction: column;
   align-items: center;
 }
 
 .custom_nav-container .navbar-toggler {
   outline: none;
-}
-
-.custom_nav-container .navbar-toggler {
-  padding: 0;
-  width: 37px;
-  height: 42px;
+  background-color: var(--whiter-clr-);
+  padding: 2px;
+  width: 40px;
+  height: 45px;
   transition: all 0.3s;
 }
 
@@ -251,7 +244,7 @@ a:focus {
   background-color: var(--primary-clr-);
   padding: 25px;
   border-radius: 15px;
-  margin-top: 7%;
+  margin-top: 100px;
 }
 
 .information_section .row {
@@ -320,6 +313,12 @@ a:focus {
 
 .box-mechanic {
   background-image: url(../navigi-images/mechanic.svg);
+}
+.box-wash-car {
+  background-image: url(../navigi-images/car-wash.svg);
+}
+.box-gardener {
+  background-image: url(../navigi-images/gardener.svg);
 }
 .box-welder {
   background-image: url(../navigi-images/souder.svg);
@@ -404,14 +403,14 @@ a:focus {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #efefef;
   flex-direction: column;
+  background-color: #ffffff;
 }
 
 .slide-container {
   max-width: 1120px;
   width: 100%;
-  padding: 40px 0;
+  padding-bottom: 40px;
 }
 
 .slide-content {
@@ -422,7 +421,8 @@ a:focus {
 
 .card {
   border-radius: 25px;
-  background-color: #fff;
+  background-color: #ffffff;;
+  outline: none;
 }
 
 .image-content,
@@ -437,6 +437,7 @@ a:focus {
   position: relative;
   row-gap: 5px;
   padding: 25px 0;
+  
 }
 
 .overlay {
@@ -470,7 +471,7 @@ a:focus {
   height: 150px;
   width: 150px;
   border-radius: 50%;
-  background: #fff;
+  background: var(--whiter-clr-);
   padding: 3px;
 }
 
@@ -767,12 +768,6 @@ form {
   transition: all 0.2s 0.7s;
   overflow: hidden;
   grid-column: 1 / 2;
-}
-
-.title {
-  font-size: 2.2rem;
-  color: var(--secondary-clr-);
-  margin-bottom: 10px;
 }
 
 .input-field {
