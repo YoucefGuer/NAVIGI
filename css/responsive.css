@@ -81,11 +81,41 @@
 }
 
 @media (max-width: 480px) {
+    .info_section .row>div {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
 
-    .navbar-brand{
-        display: none;
-    } 
+    }
+
+    .info_section {
+        margin: 0 25px 25px;
+    }
     
+    .slide-content{
+      margin: 0 10px;
+    }
+    .swiper-navBtn{
+        display: none;
+    }
+    .fix-top{
+        background-color: var(--whiter-clr-);
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+    }
+
+    .contact-container {
+        display: flex;
+        flex-direction: column;
+        margin-top: 90px;
+    }
+    
+    .information_section .detail-box h1 {
+    text-decoration: none;
+    font-size: 35px;
+      margin-bottom: 10px;
+    }
 }
 
 @media (min-width: 1200px) {

@@ -550,6 +550,21 @@ a:focus {
   background-color: var(--primary-clr-);
 }
 
+
+.box-worker1 {
+  background-image: url(../navigi-images/worker1.png);
+}
+.box-worker2 {
+  background-image: url(../navigi-images/worker2.png);
+}
+.box-worker3 {
+  background-image: url(../navigi-images/worker3.png);
+}
+.box-worker4 {
+  background-image: url(../navigi-images/worker4.png);
+}
+
+
 /* END Workers Section */
 
 /* About Navigi's Team Section */
@@ -562,11 +577,15 @@ a:focus {
   margin: 15px 45px;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.25);
   padding: 25px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
 }
 
 .about_section .box .about_info {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .about_section .box .about_info .about_name h5 {
