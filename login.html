@@ -84,17 +84,23 @@
     <div class="container1">
       <div class="forms-container">
         <div class="signin-signup">
-          <form action="php/signin.php" id="loginForm"  class="sign-in-form" method="POST">
+          <form action="php/signin.php" id="loginForm" onsubmit="validatesigninForm(event)" class="sign-in-form" method="POST">
+
             <h2 class="title">Sign In</h2>
             <div class="input-field">
               <i class="fas fa-user"></i>
-              <input type="email" placeholder="email" name="email" required />
+              <input  id="email" placeholder="email" name="email"  />
             </div>
+            <span id="emailNotValid" class="email-notvalid"> please enter a valid email</span>
+
             <div class="input-field">
               <i class="fas fa-lock"></i>
-              <input type="password" placeholder="Password" name="password" required/>
+              <input type="password" id="password" placeholder="Password" name="password" />
             </div>
             <span id="passwordError" class="password-error">Incorrect password, try again</span>
+            <span id="passwordLength" class="password-length"> !! Password should be at least 8 characters</span>
+            <span id="emptyfield" class="emptyfield"> please fill all the fields</span>
+
             <input type="submit" value="Login" class="mybtn" />
 
             <p class="social-text">Or Sign in with social platforms</p>
@@ -111,20 +117,30 @@
           </form>
 
 
-          <form action="php/signup.php" class="sign-up-form" method="POST">
+          <form action="php/signup.php" class="sign-up-form" onsubmit="validatesignupForm(event)" method="POST">
             <h2 class="title">Sign Up</h2>
             <div class="input-field">
+
               <i class="fas fa-user"></i>
-              <input type="text" placeholder="Username" name="username" required />
+              <input type="text" id="username" placeholder="Username" name="username"  />
             </div>
+            <span id="usernameNotValid"> please enter a valid username </span>
             <div class="input-field">
               <i class="fas fa-envelope"></i>
-              <input type="email" placeholder="Email" name="email" required />
+              <input id="email1" placeholder="Email" name="email"  />
+  
             </div>
+            <span id="emailNotValid" class="email-notvalid"> please enter a valid email </span>
             <div class="input-field">
               <i class="fas fa-lock"></i>
-              <input type="password" placeholder="Password" name="password" required/>
+              <input type="password" id="password1" placeholder="Password" name="password" />
+
+
             </div>
+            <span id="emptyfield1" class="emptyfield"> please fill all the fields</span>
+            <span id="passwordLength" class="password-length"> !! Password should be at least 8 characters</span>
+
+
             <input type="submit" value="Sign Up" class="mybtn" />
 
             <p class="social-text">Or Sign up with social platforms</p>
