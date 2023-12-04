@@ -51,50 +51,69 @@ function validatesignupForm(event) {
     const email = document.getElementById('email1');
     const password = document.getElementById('password1');
     var emptyfield1 = document.getElementById("emptyfield1");
-
+    var usernameNotValidElement = document.getElementById("usernameNotValid");
+    var emailNotValidElement1 = document.getElementById("emailNotValid1");
+    var passwordLengthElement1 = document.getElementById("passwordLength1");
 
     // Simple validation - Check if fields are empty
-    if ( email.value == "" || password.value == "" || username.value == "") {
+    if (email.value.trim() === "" || password.value.trim() === "" || username.value.trim() === "") {
         emptyfield1.style.display = "block";
         return false;
-    }
-    else { 
-        emptyfield1.style.display = "none";
-        console.log("ggg");
-    }
-
-    const usernameRegex = /^[a-zA-Z0-9_]{3,50}$/;
-
-    if (usernameRegex.test(username)) {
-        var usernameNotValidElement = document.getElementById("usernameNotValid");
-        usernameNotValidElement.style.display = "none";
     } else {
-        var usernameNotValidElement = document.getElementById("usernameNotValid");
+        emptyfield1.style.display = "none";
+    }
+
+    // Username validation with a regex pattern
+    const usernameRegex = /^[a-zA-Z0-9_]{3,50}$/;
+    if (!usernameRegex.test(username.value.trim())) {
         usernameNotValidElement.style.display = "block";
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email.value.trim())) {
+        emailNotValidElement1.style.display = "block";
+        // Password length validation
+    if (password.value.trim().length < 8) {
+        passwordLengthElement1.style.display = "block";
         return false; // Prevent form submission
+    } else {
+        passwordLengthElement1.style.display = "none";
+    }
+        return false; // Prevent form submission
+    } else {
+        emailNotValidElement1.style.display = "none";
+    }
+        return false; // Prevent form submission
+    } else {
+        usernameNotValidElement.style.display = "none";
     }
 
     // Validation for email format using a regular expression
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-        emailnotvalid();
+    if (!emailRegex.test(email.value.trim())) {
+        emailNotValidElement1.style.display = "block";
+        // Password length validation
+    if (password.value.trim().length < 8) {
+        passwordLengthElement1.style.display = "block";
         return false; // Prevent form submission
+    } else {
+        passwordLengthElement1.style.display = "none";
     }
-    else {
-        var emailNotValidElement = document.getElementById("emailNotValid");
-        emailNotValidElement.style.display = "none" ;
+        return false; // Prevent form submission
+    } else {
+        emailNotValidElement1.style.display = "none";
     }
 
     // Password length validation
-    if (password.length < 8) {
-        showPasswordLength();
+    if (password.value.trim().length < 8) {
+        passwordLengthElement1.style.display = "block";
         return false; // Prevent form submission
+    } else {
+        passwordLengthElement1.style.display = "none";
     }
-    else {
-   
-    }
-    return true; // Allow form submission
+
+    // If all validations pass, allow form submission
+    return true;
 }
+
 function validatesigninForm(event) {
     event.preventDefault(); // Prevent the form from submitting by default
 
@@ -116,6 +135,14 @@ function validatesigninForm(event) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
         emailnotvalid();
+        if (password.length < 8) {
+            showPasswordLength();
+            return false; // Prevent form submission
+        }
+        else {
+            var passwordLengthElement = document.getElementById("passwordLength");
+        passwordLengthElement.style.display = "none";
+        }
         return false; // Prevent form submission
     }
     else {

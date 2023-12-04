@@ -132,7 +132,7 @@ form.sign-in-form {
   padding: 0.7rem 0;
   font-size: 1rem;
 }
-.password-error, .password-length , .email-notvalid, .emptyfield , #usernameNotValid{
+.password-error, .password-length , .email-notvalid, .emptyfield , #usernameNotValid ,#emailNotValid1 , #passwordLength1 {
   display: none;
   color: red;
   font-size: 1rem;
