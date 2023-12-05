@@ -551,18 +551,10 @@ a:focus {
 }
 
 
-.box-worker1 {
-  background-image: url(../navigi-images/worker1.png);
+.box-worker {
+  background-image: url(/navigi-images/profilePic.svg);
 }
-.box-worker2 {
-  background-image: url(../navigi-images/worker2.png);
-}
-.box-worker3 {
-  background-image: url(../navigi-images/worker3.png);
-}
-.box-worker4 {
-  background-image: url(../navigi-images/worker4.png);
-}
+
 
 
 /* END Workers Section */
@@ -848,4 +840,93 @@ form {
 /* start worker section */
 .worker-section {
   margin: 80px 30px 50px 10px;
+}
+
+
+.errorMessage {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.profilePic{
+  width: 35px;
+}
+
+
+
+/*Start Profile Page */
+.row{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.container3{
+  display :flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+  border-radius: 15px;
+}
+
+.card-body h5{
+  margin-block-end: 1em;
+  margin-block-start: 1em;
+} 
+
+#profilePicCard{
+  width: 100px;
+  border-radius: 50%;
+}
+
+.class-body{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+.sidebar{
+  background-color: #2959ac;
+  color: #fff ;
+  height: auto;
+  width: 90vh;
+  margin-top: 100px;
+  padding-top: 30px;
+  border-radius: 10px;
+  display: flex;
+}
+
+.About{
+  width: 80%;
+  justify-content: center;
+  margin-top: 100px;
+}
+.elements{
+  padding: 10px;
+  background-color: #fff;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 45px;
+}
+.fot{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-right: 45px;
+  background-color: #fff;
+  padding-left: 10px;
+  padding-bottom: 20px;
+  margin-left:10px;
+  padding-top: 10px;
+}
+
+.card{
+  position: relative;
+  display:flex;
+  flex-direction: column;
 }

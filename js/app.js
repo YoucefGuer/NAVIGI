@@ -109,7 +109,10 @@ function validatesignupForm(event) {
     } else {
         passwordLengthElement1.style.display = "none";
     }
-
+    alert('need backend');
+    username.value ='';
+    email.value ='';
+    password.value ='';
     // If all validations pass, allow form submission
     return true;
 }
@@ -118,12 +121,12 @@ function validatesigninForm(event) {
     event.preventDefault(); // Prevent the form from submitting by default
 
     // Fetching form elements by their IDs
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
+    const email = document.getElementById('email');
+    const password = document.getElementById('password');
     var emptyfield = document.getElementById("emptyfield");
 
     // Simple validation - Check if fields are empty
-    if ( email == "" || password == "") {
+    if ( email.value == "" || password.value == "") {
         emptyfield.style.display = "block";
         return false;
     }
@@ -133,7 +136,7 @@ function validatesigninForm(event) {
 
     // Validation for email format using a regular expression
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
+    if (!emailRegex.test(email.value)) {
         emailnotvalid();
         if (password.length < 8) {
             showPasswordLength();
@@ -151,13 +154,17 @@ function validatesigninForm(event) {
     }
 
     // Password length validation
-    if (password.length < 8) {
+    if (password.value.length < 8) {
         showPasswordLength();
         return false; // Prevent form submission
     }
     else {
         var passwordLengthElement = document.getElementById("passwordLength");
     passwordLengthElement.style.display = "none";
+
     }
+    alert('need backend');
+    email.value ='';
+    password.value='';
     return true; // Allow form submission
 }
