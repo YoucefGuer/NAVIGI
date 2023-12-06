@@ -8,7 +8,7 @@ function validateForm() {
     document.getElementById('WilayaError').textContent = '';
     document.getElementById('CityError').textContent = '';
     document.getElementById('CheckBoxError').textContent = '';
-  
+    
     // Get form inputs
     const FirstName = document.getElementById('FirstName');
     const LastName = document.getElementById('LastName');
@@ -47,6 +47,17 @@ function validateForm() {
 
     if (!CheckBox.checked) {
         document.getElementById('CheckBoxError').textContent = 'You have to accept';
+        isValid = false;
+    }
+
+    const FirstNameRegex = /^[a-zA-Z_]{3,50}$/;
+    if (!FirstNameRegex.test(FirstName.value.trim())) {
+        document.getElementById('FirstNameError').textContent = 'First Name is invalid';
+        isValid = false;
+    }
+    const LastNameRegex = /^[a-zA-Z_]{3,50}$/;
+    if (!LastNameRegex.test(LastName.value.trim())) {
+        document.getElementById('LastNameError').textContent = 'Last Name is invalid';
         isValid = false;
     }
   
