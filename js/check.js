@@ -60,7 +60,6 @@ function validateForm() {
         CheckBox.checked =false;
         alert('Need Backend');
         isValid=false;
-        // You can also submit the form to a server here
     }
     return isValid;
   }
