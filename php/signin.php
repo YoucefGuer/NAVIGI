@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $row = $result->fetch_assoc();
         if (password_verify($password, $row['pwd'])) {
             // Password is correct, set session variables
-            $_SESSION['id'] = $row['id'];
+            $_SESSION['user_id'] = $row['user_id'];
             http_response_code(200);
         } else {
             // Incorrect password

@@ -109,11 +109,8 @@ function validatesignupForm(event) {
     } else {
         passwordLengthElement1.style.display = "none";
     }
-    alert('need backend');
-    username.value ='';
-    email.value ='';
-    password.value ='';
-    // If all validations pass, allow form submission
+
+    //If all validations pass, allow form submission
     return true;
 }
 
@@ -163,8 +160,6 @@ function validatesigninForm(event) {
     passwordLengthElement.style.display = "none";
 
     }
-    alert('need backend');
-    email.value ='';
-    password.value='';
+    
     return true; // Allow form submission
 }

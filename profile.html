@@ -109,44 +109,60 @@
     
     <!-- worker profile  -->
   <div class=" information_container container mt-5 mb-5"> 
-    <form action="/" onsubmit="return validateForm()">
+    <form action="" onsubmit="return validateForm()" method="POST">
     <div class="row ">
 
       <div class="col-md-6 mt-2">
         <label for="firstName" class="form-label">First Name</label>
-        <input type="text" class="m-2 form-control" id="FirstName" />
+        <input type="text" class="m-2 form-control" id="FirstName" name="firstName" />
         <span class="errorMessage" id="FirstNameError"></span>
       </div>
 
       <div class="col-md-6 mt-2">
-        <label for="last_name" class="form-label">Last Name</label>
-        <input type="text" class=" m-2 form-control" id="LastName" />
+        <label for="last_name" class="form-label" >Last Name</label>
+        <input type="text" class=" m-2 form-control" id="LastName" name="lastName" />
         <span class="errorMessage" id="LastNameError"></span>
       </div>
 
       <div class="col-12 mt-2">
-        <label for="inputAddress" class="form-label">Address</label>
-        <input type="text" class="form-control m-2" id="Address" placeholder="1234 Main St"/>
+        <label for="inputAddress" class="form-label" >Address</label>
+        <input type="text" class="form-control m-2"name="Address" id="Address" placeholder="1234 Main St"/>
         <span class="errorMessage" id="AddressError"></span>
       </div>
       
       
       <div class="col-md-6 mt-2" >
-        <label for="inputwilaya" class="form-label">wilaya</label>
-        <input type="text" class="form-control m-2" id="Wilaya" />
+        <label for="inputwilaya" class="form-label" >wilaya</label>
+        <input type="text" class="form-control m-2" name="wilaya" id="Wilaya" />
         <span class="errorMessage" id="WilayaError"></span>
       </div>
 
       <div class="col-md-6 mt-2">
-        <label for="inputCity" class="form-label">city</label>
-        <input type="text" class="form-control m-2" id="City" />
+        <label for="inputCity" class="form-label" >city</label>
+        <input type="text" class="form-control m-2"name="city" id="City" />
         <span class="errorMessage" id="CityError"></span>
       </div>
 
+
       <div class="col-md-6 mt-2" >
-        <label for="file" class="form-labe">image</label>
+        <label for="inputage" class="form-label" >age</label>
+        <input type="text" class="form-control m-2" name="age" id="age" />
+        <span class="errorMessage" id="ageError"></span>
+      </div>
+
+      <div class="col-md-6 mt-2">
+        <label for="inputPhone" class="form-label" >phone</label>
+        <input type="text" class="form-control m-2" name="phone" id="Phone" />
+        <span class="errorMessage" id="PhoneError"></span>
+      </div>
+
+
+
+
+      <div class="col-md-6 mt-2" >
+        <label for="file" class="form-labe" >image</label>
         <div>
-          <input type="file" class="m-2" id="profile_image" />
+          <input type="file" class="m-2" id="profile_image" accept="image/png, image/gif, image/jpeg" name="image"/>
         </div>
       </div>
 
@@ -169,14 +185,14 @@
 
       <div class="col-12 mt-2">
         <div class="form-check">
-          <input class="form-check-input " type="checkbox" id="CheckBox" />
+          <input class="form-check-input" type="checkbox" id="CheckBox" />
           <label class="form-check-label" for="gridCheck"> I accept the user guidlines </label>
           <span class="errorMessage" id="CheckBoxError"></span>
         </div>
       </div>
 
       <div class="col-12 mt-2">
-        <button type="submit" class="btn btn-primary" >Sign in</button>
+        <button type="submit" class="btn btn-primary" >Join</button>
       </div>
     </div>
   </form>
