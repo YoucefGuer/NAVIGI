@@ -27,3 +27,7 @@ $('.owl-carousel').owlCarousel({
         }
     }
 })
+let submenu = document.getElementById("SubMenu");
+function toggleMenu(){
+    submenu.classList.toggle("open-menu");
+}

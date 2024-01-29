@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
 
@@ -34,7 +35,7 @@
     <!-- header section strats -->
     <header class="header_section ">
       <nav class="navbar  navbar-expand-lg custom_nav-container  fix-top">
-        <a class="navbar-brand" href="index.html">
+        <a class="navbar-brand" href="index.php">
           <span id="TITLE">
             NAVIGI
           </span>
@@ -46,44 +47,67 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
           <div class="logo-header">
-            <a href="index.html">
-              <img src="/navigi-images/navigi-logo.svg" alt="NAVIGI" width="80px">
+            <a href="index.php">
+              <img src="navigi-images/navigi-logo.svg" alt="NAVIGI" width="80px">
             </a>
           </div>
 
           <ul class="navbar-nav  ">
             <li class="nav-item">
-              <a class="nav-link" href="index.html">Home</a>
+              <a class="nav-link" href="index.php">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="categories.html">Categories</a>
+              <a class="nav-link" href="categories.php">Categories</a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link" href="Workers.html">Workers</a>
+              <a class="nav-link" href="workers.php">Workers</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="aboutus.html">About Us</a>
+              <a class="nav-link" href="aboutus.php">About Us</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="contact.html">Contact Us</a>
+              <a class="nav-link" href="contact.php">Contact Us</a>
             </li>
           </ul>
 
+          
           <li class="nav-item" id="login-nav">
             <div class="user_option">
-              <a class="nav-link" href="login.html">
+              <?php if (!isset($_SESSION['user_id'])): ?>
+              <a class="nav-link" href="login.php">
                 <i class="fa fa-user" aria-hidden="true"></i>
-                 Account</a>
-
-                 <a href="Wprofile.html" class="nav_link">
-                  <img src="navigi-images/profilePic.svg" alt="profilePic" class="profilePic">
-                </a>
+                Account</a>
+          <?php endif; ?>
+              
             </div>
           </li>
 
-        </div>
-      </nav>
-    </header>
+          <?php if (isset($_SESSION['user_id'])): ?>
+              <img src="navigi-images/profilePic.svg" alt="profile" class="user-pic" onclick="toggleMenu()">
+            <?php endif; ?>
+            <div class="drop-menu" id="SubMenu">
+              <div class="sub-menu">
+                <div class="user-info">
+                  <img src="navigi-images/profilePic.svg" >
+                  <h2>Youcef Guergour</h2>
+                </div>
+                <hr>
+                <a href="Wprofile.php" class="sub-menu-link">
+                  <img src="navigi-images/profile.png" >
+                  <p>Your Profile</p>
+                  <span>></span>
+                </a>
+                <a href="php/logout.php" class="sub-menu-link">
+                  <img src="navigi-images/logout.png" >
+                  <p>Logout</p>
+                  <span>></span>
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </nav>
+      </header>
     <!-- end header section -->
 
   </div>
@@ -94,65 +118,27 @@
   <section class="shop_section layout_padding">
     <div class="container">
       <div class="heading_container heading_center">
-        <h2>
-          Our Workers
-        </h2>
+        <h2 class="secondary-color">Our Workers</h2>
       </div>
       <div class="row">
-        <div class="col-sm-6 col-md-4 col-lg-3">
-          <a href="#">
-            <div class="box box-worker category-box">
-              <div class="dark_over"></div>
-              <h6>Mechanic</h6>
+
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="our-team">
+                <div class="picture">
+                    <img class="img-fluid" src="navigi-images/amine.png">
+                </div>
+                <div class="team-content">
+                    <h3 class="name"> n, </h3>
+                    <h4 class="title">Web Developer</h4>
+                </div>
+                <ul class="social">
+                    <a href="categories.php">Make Offer</a>
+                </ul>
             </div>
-          </a>
         </div>
-  
-        <div class="col-sm-6 col-md-4 col-lg-3">
-          <a href="#">
-            <div class="box box-worker category-box">
-              <div class="dark_over"></div>
-              <h6>Welder</h6>
-            </div>
-          </a>
-        </div>
-  
-        <div class="col-sm-6 col-md-4 col-lg-3">
-          <a href="#">
-            <div class="box box-worker category-box">
-              <div class="dark_over"></div>
-              <h6>Carpenter</h6>
-            </div>
-          </a>
-        </div>
-  
-        <div class="col-sm-6 col-md-4 col-lg-3">
-          <a href="#">
-            <div class="box box-worker category-box">
-              <div class="dark_over"></div>
-              <h6>Electrician</h6>
-            </div>
-          </a>
-        </div>
-  
-        <div class="col-sm-6 col-md-4 col-lg-3">
-          <a href="#">
-            <div class="box box-worker category-box">
-              <div class="dark_over"></div>
-              <h6>Plumber</h6>
-            </div>
-          </a>
-        </div>
-  
-        <div class="col-sm-6 col-md-4 col-lg-3">
-          <a href="#">
-            <div class="box box-worker category-box">
-              <div class="dark_over"></div>
-              <h6>Tailor</h6>
-            </div>
-          </a>
-        </div>
+
       </div>
+    </div>
   </section>
 
   <!-- end workers section -->
@@ -205,7 +191,7 @@
         <div class="container">
           <p>
             &copy; <span id="displayYear"></span> All Rights Reserved By
-            <a href="index.html">NAVIGI</a>
+            <a href="index.php">NAVIGI</a>
           </p>
         </div>
       </footer>

@@ -1,4 +1,4 @@
-
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -25,7 +25,7 @@
       <!-- header section strats -->
       <header class="header_section">
         <nav class="navbar navbar-expand-lg custom_nav-container fix-top">
-          <a class="navbar-brand" href="index.html">
+          <a class="navbar-brand" href="index.php">
             <span id="TITLE"> NAVIGI </span>
           </a>
           <button
@@ -42,9 +42,9 @@
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <div class="logo-header">
-              <a href="index.html">
+              <a href="index.php">
                 <img
-                  src="/navigi-images/navigi-logo.svg"
+                  src="navigi-images/navigi-logo.svg"
                   alt="NAVIGI"
                   width="80px"
                 />
@@ -53,34 +53,57 @@
 
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="index.php">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="categories.html">Categories</a>
+                <a class="nav-link" href="categories.php">Categories</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="Workers.html">Workers</a>
+                <a class="nav-link" href="workers.php">Workers</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="aboutus.html">About Us</a>
+                <a class="nav-link" href="aboutus.php">About Us</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="contact.html">Contact Us</a>
+                <a class="nav-link" href="contact.php">Contact Us</a>
               </li>
             </ul>
 
-            <li class="nav-item active" id="login-nav">
+            
+            <li class="nav-item" id="login-nav">
               <div class="user_option">
-                <a class="nav-link" href="login.html">
+                <?php if (!isset($_SESSION['user_id'])): ?>
+                <a class="nav-link" href="login.php">
                   <i class="fa fa-user" aria-hidden="true"></i>
-                  Account
-                </a>
-
-                <a href="Wprofile.html" class="nav_link">
-                  <img src="navigi-images/profilePic.svg" alt="profilePic" class="profilePic">
-                </a>
+                  Account</a>
+            <?php endif; ?>
+                
               </div>
             </li>
+                  
+            <?php if (isset($_SESSION['user_id'])): ?>
+              <img src="navigi-images/profilePic.svg" alt="profile" class="user-pic" onclick="toggleMenu()">
+            <?php endif; ?>
+            <div class="drop-menu" id="SubMenu">
+              <div class="sub-menu">
+                <div class="user-info">
+                  <img src="navigi-images/profilePic.svg" >
+                  <h2>Youcef Guergour</h2>
+                </div>
+                <hr>
+                <a href="Wprofile.php" class="sub-menu-link">
+                  <img src="navigi-images/profile.png" >
+                  <p>Your Profile</p>
+                  <span>></span>
+                </a>
+                <a href="php/logout.php" class="sub-menu-link">
+                  <img src="navigi-images/logout.png" >
+                  <p>Logout</p>
+                  <span>></span>
+                </a>
+              </div>
+            </div>
+
           </div>
         </nav>
       </header>
@@ -89,7 +112,7 @@
     <div class="container1">
       <div class="forms-container">
         <div class="signin-signup">
-          <form action="../php/signin.php" id="loginForm"  class="sign-in-form" method="POST">
+          <form action="http://localhost/NAVIGI-FINAL/php/signin.php" id="loginForm"  class="sign-in-form" method="POST">
 
             <h2 class="title">Sign In</h2>
             <div class="input-field">
@@ -122,7 +145,7 @@
           </form>
 
 
-          <form action="php/signup.php" class="sign-up-form"  method="POST">
+          <form action="http://localhost/NAVIGI-FINAL/php/signup.php" class="sign-up-form"  method="POST">
             <h2 class="title">Sign Up</h2>
             <div class="input-field">
 

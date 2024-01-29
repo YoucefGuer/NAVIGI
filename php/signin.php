@@ -1,4 +1,11 @@
 <?php
+
+header("Access-Control-Allow-Origin: *");
+// Other CORS headers if needed
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
+
+
 session_start();
 include 'db.php';
 
@@ -21,12 +28,42 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if (password_verify($password, $row['pwd'])) {
             // Password is correct, set session variables
             $_SESSION['user_id'] = $row['user_id'];
+            $_SESSION['username'] = $row['username'];
+            // check if this user is a worker
+            $stmt = $conn->prepare("SELECT * FROM workers WHERE user_id = ?");
+            $stmt->bind_param("i", $_SESSION['user_id']);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $row = $result->fetch_assoc();
+            if ($result->num_rows > 0) {
+                // this user is a worker
+                $_SESSION['is_worker'] = true;
+                $_SESSION['first_name'] = $row['first_name'];
+                $_SESSION['last_name'] = $row['last_name'];
+                $_SESSION['phone'] = "+213" . $row['phone'];
+                $_SESSION['address'] = $row['adress'];
+                $_SESSION['city'] = $row['city'];
+                $_SESSION['email'] = $email;
+            }
+            else {
+                $_SESSION['is_worker'] = false;
+                $_SESSION['first_name'] = $_SESSION['username'];
+                $_SESSION['last_name'] = "";
+                $_SESSION['phone'] = "+213000000000";
+                $_SESSION['address'] = "ALGERIA";
+                $_SESSION['city'] = "";
+                $_SESSION['email'] = $email;
+            }
+            // create array of workers and fill it from database
+
+
             http_response_code(200);
         } else {
             // Incorrect password
-            http_response_code(400); // Set a 400 Bad Request status code
+            http_response_code(403); // Set a 400 Bad Request status code
     }
 }
+
 }
  else {
     // Invalid request method

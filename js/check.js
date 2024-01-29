@@ -61,16 +61,6 @@ function validateForm() {
         isValid = false;
     }
   
-    // Check if the form is valid
-    if (isValid==true) {
-        FirstName.value = '';
-        LastName.value = '';
-        Address.value ='';
-        Wilaya.value ='';
-        City.value ='';
-        CheckBox.checked =false;
-        alert('Need Backend');
-        isValid=false;
-    }
+    
     return isValid;
   }

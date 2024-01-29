@@ -22,9 +22,29 @@ if ($result->num_rows > 0) {
     $stmt = $conn->prepare("INSERT INTO users (username, email, pwd) VALUES (?, ?, ?)");
     $stmt->bind_param("sss", $username, $email, $hashed_password);
     $stmt->execute();
+    
+    // Use a prepared statement to prevent SQL injection
+    $stmt = $conn->prepare("SELECT user_id FROM users WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
+    
+        $row = $result->fetch_assoc();
+       
+            $_SESSION['user_id'] = $row['user_id'];
+            // check if this user is a worker
+            $stmt = $conn->prepare("SELECT * FROM workers WHERE user_id = ?");
+            $stmt->bind_param("i", $_SESSION['user_id']);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if ($result->num_rows > 0) {
+                // this user is a worker
+                $_SESSION['is_worker'] = true;
+            }
+           
     // Redirect the user to the login page
-    header("Location: ../index.html");
+    header("Location: ../index.php");
     exit(); // Terminate script to prevent further execution
 }
 

@@ -1,3 +1,13 @@
+<?php session_start(); 
+if (isset($_GET['join_as_worker']) && !isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+else if (isset($_GET['join_as_worker']) && isset($_SESSION['user_id'])) {
+    header("Location: profile.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -38,7 +48,7 @@
       <!-- header section strats -->
       <header class="header_section">
         <nav class="navbar navbar-expand-lg custom_nav-container fix-top">
-          <a class="navbar-brand" href="index.html">
+          <a class="navbar-brand" href="index.php">
             <span id="TITLE"> NAVIGI </span>
           </a>
           <button
@@ -55,9 +65,9 @@
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <div class="logo-header">
-              <a href="index.html">
+              <a href="index.php">
                 <img
-                  src="/navigi-images/navigi-logo.svg"
+                  src="navigi-images/navigi-logo.svg"
                   alt="NAVIGI"
                   width="80px"
                 />
@@ -66,33 +76,57 @@
 
             <ul class="navbar-nav">
               <li class="nav-item active">
-                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="index.php">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="categories.html">Categories</a>
+                <a class="nav-link" href="categories.php">Categories</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="Workers.html">Workers</a>
+                <a class="nav-link" href="workers.php">Workers</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="aboutus.html">About Us</a>
+                <a class="nav-link" href="aboutus.php">About Us</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="contact.html">Contact Us</a>
+                <a class="nav-link" href="contact.php">Contact Us</a>
               </li>
             </ul>
 
             <li class="nav-item" id="login-nav">
               <div class="user_option">
-                <a class="nav-link" href="login.html">
+                <?php if (!isset($_SESSION['user_id'])): ?>
+                <a class="nav-link" href="login.php">
                   <i class="fa fa-user" aria-hidden="true"></i>
                   Account</a>
-
-                  <a href="Wprofile.html" class="nav_link">
-                    <img src="navigi-images/profilePic.svg" alt="profilePic" class="profilePic">
-                  </a>
+            <?php endif; ?>
+                
               </div>
             </li>
+                  
+            <?php if (isset($_SESSION['user_id'])): ?>
+              <img src="navigi-images/profilePic.svg" alt="profile" class="user-pic" onclick="toggleMenu()">
+            <?php endif; ?>
+            <div class="drop-menu" id="SubMenu">
+              <div class="sub-menu">
+                <div class="user-info">
+                  <img src="navigi-images/profilePic.svg" >
+                  <!--display users name-->
+                    <h2> <?php echo $_SESSION['username']; ?> </h2>
+                </div>
+                <hr>
+                <a href="Wprofile.php" class="sub-menu-link">
+                  <img src="navigi-images/profile.png" >
+                  <p>Your Profile</p>
+                  <span>></span>
+                </a>
+                <a href="php/logout.php" class="sub-menu-link">
+                  <img src="navigi-images/logout.png" >
+                  <p>Logout</p>
+                  <span>></span>
+                </a>
+              </div>
+            </div>
+
           </div>
         </nav>
       </header>
@@ -112,7 +146,13 @@
                 <p>
                   Navigi brings together a diverse range of skilled professionals to meet your every need. From Mechanics to Welders, Carpenters to Electricians, Plumbers to Painters, and Masons to many more, our platform is your gateway to connecting with experts in a variety of trades. Whether you have a home improvement project, a repair job, or any other service requirement, Navigi is your one-stop destination for finding the right talent. Explore our categories and connect with professionals who can turn your vision into reality.
                 </p>
-                <a href="profile.html"> Join as Worker </a>
+              
+                <?php if (!isset($_SESSION['is_worker'])): ?>
+
+   
+                <a href="?join_as_worker=1">Join as Worker</a>
+                 <?php endif; ?>
+
               </div>
             </div>
             <div class="col-md-5">
@@ -212,7 +252,7 @@
       </div>
 
       <div class="btn-box">
-        <a href="categories.html"> See All </a>
+        <a href="categories.php"> See All </a>
       </div>
     </section>
 
@@ -244,7 +284,7 @@
                 <h2 class="name">Dje Houssem</h2>
                 <p class="description">painter</p>
 
-                <a href="Wprofile.html"><button class="button">View More</button></a>
+                <a href="Wprofile.php"><button class="button">View More</button></a>
               </div>
             </div>
 
@@ -265,7 +305,7 @@
                 <h2 class="name">GUERGOUR Youcef</h2>
                 <p class="description">Carpenter</p>
 
-                <a href="Wprofile.html"><button class="button">View More</button></a>
+                <a href="Wprofile.php"><button class="button">View More</button></a>
               </div>
             </div>
 
@@ -286,7 +326,7 @@
                 <h2 class="name">Dearafa Khalil</h2>
                 <p class="description">Plomber</p>
 
-                <a href="Wprofile.html"><button class="button">View More</button></a>
+                <a href="Wprofile.php"><button class="button">View More</button></a>
               </div>
             </div>
 
@@ -307,7 +347,7 @@
                 <h2 class="name">Amine Kichah</h2>
                 <p class="description">Mechanic</p>
 
-                <a href="Wprofile.html"><button class="button">View More</button></a>
+                <a href="Wprofile.php"><button class="button">View More</button></a>
               </div>
             </div>
           </div>
@@ -319,7 +359,7 @@
       </div>
 
       <div class="btn-box">
-        <a href="Workers.html"> See All </a>
+        <a href="workers.php"> See All </a>
       </div>
     </section>
 
@@ -449,7 +489,7 @@
         <div class="container">
           <p>
             &copy; <span id="displayYear"></span> All Rights Reserved By
-            <a href="index.html">NAVIGI</a>
+            <a href="index.php">NAVIGI</a>
           </p>
         </div>
       </footer>

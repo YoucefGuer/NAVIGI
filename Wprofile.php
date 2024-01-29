@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
 
@@ -35,7 +36,7 @@
     <header class="header_section ">
         <div class="profile">
       <nav class="navbar  navbar-expand-lg custom_nav-container  fix-top">
-        <a class="navbar-brand" href="index.html">
+        <a class="navbar-brand" href="index.php">
           <span id="TITLE">
             NAVIGI
           </span>
@@ -47,40 +48,61 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
           <div class="logo-header">
-            <a href="index.html">
-              <img src="/navigi-images/navigi-logo.svg" alt="NAVIGI" width="80px">
+            <a href="index.php">
+              <img src="navigi-images/navigi-logo.svg" alt="NAVIGI" width="80px">
             </a>
           </div>
 
           <ul class="navbar-nav  ">
             <li class="nav-item">
-              <a class="nav-link" href="index.html">Home</a>
+              <a class="nav-link" href="index.php">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="categories.html">Categories</a>
+              <a class="nav-link" href="categories.php">Categories</a>
             </li>
             <li class="nav-item ">
-              <a class="nav-link" href="Workers.html">Workers</a>
+              <a class="nav-link" href="workers.php">Workers</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="aboutus.html">About Us</a>
+              <a class="nav-link" href="aboutus.php">About Us</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="contact.html">Contact Us</a>
+              <a class="nav-link" href="contact.php">Contact Us</a>
             </li>
           </ul>
 
+          
           <li class="nav-item" id="login-nav">
             <div class="user_option">
-              <a class="nav-link" href="login.html">
+              <?php if (!isset($_SESSION['user_id'])): ?>
+              <a class="nav-link" href="login.php">
                 <i class="fa fa-user" aria-hidden="true"></i>
-                 Account</a>
-
-                 <a href="Wprofile.html" class="nav_link active">
-                    <img src="navigi-images/profilePic.svg" alt="profilePic" class="profilePic">
-                  </a>
+                Account</a>
+          <?php endif; ?>
+              
             </div>
           </li>
+
+          <img src="navigi-images/profilePic.svg" alt="profile" class="user-pic" onclick="toggleMenu()">
+          <div class="drop-menu" id="SubMenu">
+            <div class="sub-menu">
+              <div class="user-info">
+                <img src="navigi-images/profilePic.svg" >
+                <h2>Youcef Guergour</h2>
+              </div>
+              <hr>
+              <a href="Wprofile.php" class="sub-menu-link">
+                <img src="navigi-images/profile.png" >
+                <p>Your Profile</p>
+                <span>></span>
+              </a>
+              <a href="php/logout.php" class="sub-menu-link">
+                <img src="navigi-images/logout.png" >
+                <p>Logout</p>
+                <span>></span>
+              </a>
+            </div>
+          </div>
 
         </div>
       </nav>
@@ -103,7 +125,7 @@
                         <h5>Full Name</h5>
                     </div>
                     <div class="Name">
-                        Burt Mackline
+                        <?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name']; ?> 
                     </div>
                 </div>
                 <hr>
@@ -112,7 +134,7 @@
                         <h5>Email</h5>
                     </div>
                     <div class="col-md-9 text-secondary">
-                        adc@gmail.com
+                        <?php echo $_SESSION['email']; ?>
                     </div>
                 </div>
                 <hr>
@@ -121,7 +143,7 @@
                         <h5>Phone</h5>
                     </div>
                     <div class="col-md-9 text-secondary">
-                        058974683
+                        <?php echo $_SESSION['phone']; ?>
                     </div>
                 </div>
                 <div class="row1">
@@ -129,7 +151,7 @@
                         <h5>Address</h5>
                     </div>
                     <div class="col-md-9 text-secondary">
-                        sidi Abdellah Alger
+                        <?php echo $_SESSION['address']. " , " .$_SESSION['city'] ?>
                     </div>
                 </div>
             </div>
@@ -191,7 +213,7 @@
           <div class="container">
             <p>
               &copy; <span id="displayYear"></span> All Rights Reserved By
-              <a href="index.html">NAVIGI</a>
+              <a href="index.php">NAVIGI</a>
             </p>
           </div>
         </footer>

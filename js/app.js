@@ -14,14 +14,15 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
 
     var formData = new FormData(this);
 
-    fetch("../php/login.php", {
+    fetch("http://localhost/NAVIGI-FINAL/php/signin.php", {
         method: "POST",
         body: formData,
     })
     .then(response => {
         if (response.status === 200) {
+            console.log(response);
             // Password is correct, you can handle the redirection here
-            window.location.href = "../index.html"; // Redirect to a success page
+            window.location.href = "http://localhost/NAVIGI-FINAL/index.php"; // Redirect to a success page
         } else if (response.status === 403) {
             showPasswordError();
         }
@@ -29,6 +30,7 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
     .catch(error => {
         console.error(error);
     });
+    
 });
 
 function showPasswordError() {
