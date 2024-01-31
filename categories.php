@@ -138,7 +138,7 @@
         </div>
         <div class="row">
           <div class="col-sm-6 col-md-4 col-lg-3">
-            <a href="categories.php">
+            <a href="categories.php" >
               <div class="box box-mechanic category-box">
                 <div class="dark_over"></div>
                 <h6>Mechanic</h6>

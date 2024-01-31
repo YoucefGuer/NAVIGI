@@ -133,7 +133,7 @@
     
     <!-- worker profile  -->
   <div class=" information_container container mt-5 mb-5"> 
-    <form action="http://localhost/NAVIGI-FINAL/php/worker.php"  method="POST">
+    <form action="http://localhost/NAVIGI-FINAL/php/worker.php"  method="POST" enctype="multipart/form-data" >
     <div class="row ">
 
       <div class="col-md-6 mt-2">
@@ -176,7 +176,7 @@
 
       <div class="col-md-6 mt-2">
         <label for="inputPhone" class="form-label" >phone</label>
-        <input type="text" class="form-control m-2" name="phone" id="Phone" />
+          <input type="text" class="form-control m-2" name="phone" id="Phone" />
         <span class="errorMessage" id="PhoneError"></span>
       </div>
 
@@ -186,7 +186,7 @@
       <div class="col-md-6 mt-2" >
         <label for="file" class="form-labe" >image</label>
         <div>
-          <input type="file" class="m-2" id="profile_image" accept="image/png, image/gif, image/jpeg" name="image"/>
+          <input type="file" class="m-2" id="profile_image" accept="image/png, image/jpeg, image/jpg" name="image"/>
         </div>
       </div>
 

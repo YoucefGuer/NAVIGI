@@ -46,11 +46,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $_SESSION['email'] = $email;
             }
             else {
-                $_SESSION['is_worker'] = false;
                 $_SESSION['first_name'] = $_SESSION['username'];
                 $_SESSION['last_name'] = "";
-                $_SESSION['phone'] = "+213000000000";
-                $_SESSION['address'] = "ALGERIA";
+                $_SESSION['phone'] = "NOT SET YET";
+                $_SESSION['address'] = "NOT SET YET";
                 $_SESSION['city'] = "";
                 $_SESSION['email'] = $email;
             }

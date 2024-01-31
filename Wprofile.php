@@ -117,7 +117,7 @@
         <div class="elements">
             <div class="class-body">
                 <h1 class="m-3 pt-3">About</h1>
-                <img src="navigi-images/profilePic.svg" id="profilePicCard">
+                <img src= "uploads/default.png" id="profilePicCard">
             </div>
             <div class="card-body">
                 <div class="row1">
@@ -125,7 +125,7 @@
                         <h5>Full Name</h5>
                     </div>
                     <div class="Name">
-                        <?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name']; ?> 
+                        <?= $_SESSION['first_name'] . " " . $_SESSION['last_name']; ?> 
                     </div>
                 </div>
                 <hr>
@@ -151,7 +151,7 @@
                         <h5>Address</h5>
                     </div>
                     <div class="col-md-9 text-secondary">
-                        <?php echo $_SESSION['address']. " , " .$_SESSION['city'] ?>
+                        <?php echo $_SESSION['address']. " " .$_SESSION['city'] ?>
                     </div>
                 </div>
             </div>

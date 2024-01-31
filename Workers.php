@@ -116,31 +116,46 @@
   <!-- workers section -->
 
   <section class="shop_section layout_padding">
+    
     <div class="container">
       <div class="heading_container heading_center">
         <h2 class="secondary-color">Our Workers</h2>
       </div>
-      <div class="row">
-
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-            <div class="our-team">
+      
+    <div class="row">
+      <?php 
+        require 'php/db.php';
+        $query = "SELECT workers.first_name, workers.last_name, category.cat_name 
+        FROM workers
+        JOIN category ON workers.cat_id = category.cat_id";
+        $query_run = mysqli_query($conn, $query);
+        $check_workers = mysqli_num_rows($query_run) > 0;
+        if($check_workers){
+          while($row = mysqli_fetch_assoc($query_run)){
+      ?>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+              <div class="our-team">
                 <div class="picture">
-                    <img class="img-fluid" src="navigi-images/amine.png">
+                  <img class="img-fluid" src="navigi-images/amine.png">
                 </div>
                 <div class="team-content">
-                    <h3 class="name"> n, </h3>
-                    <h4 class="title">Web Developer</h4>
+                  <h3 class="name"> <?php echo $row['first_name']." ". $row['last_name']; ?> </h3>
+                  <h4 class="title"><?php echo $row['cat_name'] ?></h4>
                 </div>
                 <ul class="social">
-                    <a href="categories.php">Make Offer</a>
+                  <a href="categories.php">Make Offer</a>
                 </ul>
+              </div>
             </div>
-        </div>
-
-      </div>
+      <?php
+          }
+        } else {
+          echo "No workers found";
+        }
+      ?>
+    </div>
     </div>
   </section>
-
   <!-- end workers section -->
 
 

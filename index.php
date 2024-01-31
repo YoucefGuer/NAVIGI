@@ -104,14 +104,14 @@ else if (isset($_GET['join_as_worker']) && isset($_SESSION['user_id'])) {
             </li>
                   
             <?php if (isset($_SESSION['user_id'])): ?>
-              <img src="navigi-images/profilePic.svg" alt="profile" class="user-pic" onclick="toggleMenu()">
+              <img src="uploads/default.png" alt="profile" class="user-pic" onclick="toggleMenu()">
             <?php endif; ?>
             <div class="drop-menu" id="SubMenu">
               <div class="sub-menu">
                 <div class="user-info">
-                  <img src="navigi-images/profilePic.svg" >
+                  <img src= "uploads/default.png">
                   <!--display users name-->
-                    <h2> <?php echo $_SESSION['username']; ?> </h2>
+                    <h2> <?= $_SESSION['username']; ?> </h2>
                 </div>
                 <hr>
                 <a href="Wprofile.php" class="sub-menu-link">
@@ -148,10 +148,8 @@ else if (isset($_GET['join_as_worker']) && isset($_SESSION['user_id'])) {
                 </p>
               
                 <?php if (!isset($_SESSION['is_worker'])): ?>
-
-   
-                <a href="?join_as_worker=1">Join as Worker</a>
-                 <?php endif; ?>
+                  <a href="?join_as_worker=1">Join as Worker</a>
+                <?php endif; ?>
 
               </div>
             </div>
@@ -267,89 +265,51 @@ else if (isset($_GET['join_as_worker']) && isset($_SESSION['user_id'])) {
       <div class="slide-container swiper">
         <div class="slide-content">
           <div class="card-wrapper swiper-wrapper">
-            <div class="card swiper-slide">
-              <div class="image-content">
-                <span class="overlay"></span>
+            
 
-                <div class="card-image">
-                  <img
-                    src="navigi-images/profilePic.svg"
-                    alt=""
-                    class="card-img"
-                  />
-                </div>
+            <?php 
+        require 'php/db.php';
+        $query = "SELECT workers.first_name, workers.last_name, category.cat_name 
+        FROM workers
+        JOIN category ON workers.cat_id = category.cat_id";
+        $query_run = mysqli_query($conn, $query);
+        $check_workers = mysqli_num_rows($query_run) > 0;
+        if($check_workers){
+          $rows = [];
+          while($row = mysqli_fetch_assoc($query_run)){
+              $rows[] = $row;
+          }
+
+          for($i = 0; $i < 5; $i++){
+          ?>
+              <div class="card swiper-slide">
+                  <div class="image-content">
+                      <span class="overlay"></span>
+
+                      <div class="card-image">
+                          <img
+                              src="navigi-images/profilePic.svg"
+                              alt=""
+                              class="card-img"
+                          />
+                      </div>
+                  </div>
+
+                  <div class="card-content">
+                      <h2 class="name"> <?php echo $rows[$i]['first_name']." ". $rows[$i]['last_name']; ?> </h2>
+                      <p class="description"> <?php echo $rows[$i]['cat_name'] ?> </p>
+
+                      <a href="Wprofile.php"><button class="button">View More</button></a>
+                  </div>
+
               </div>
-
-              <div class="card-content">
-                <h2 class="name">Dje Houssem</h2>
-                <p class="description">painter</p>
-
-                <a href="Wprofile.php"><button class="button">View More</button></a>
-              </div>
-            </div>
-
-            <div class="card swiper-slide">
-              <div class="image-content">
-                <span class="overlay"></span>
-
-                <div class="card-image">
-                  <img
-                    src="navigi-images/profilePic.svg"
-                    alt=""
-                    class="card-img"
-                  />
-                </div>
-              </div>
-
-              <div class="card-content">
-                <h2 class="name">GUERGOUR Youcef</h2>
-                <p class="description">Carpenter</p>
-
-                <a href="Wprofile.php"><button class="button">View More</button></a>
-              </div>
-            </div>
-
-            <div class="card swiper-slide">
-              <div class="image-content">
-                <span class="overlay"></span>
-
-                <div class="card-image">
-                  <img
-                    src="navigi-images/profilePic.svg"
-                    alt=""
-                    class="card-img"
-                  />
-                </div>
-              </div>
-
-              <div class="card-content">
-                <h2 class="name">Dearafa Khalil</h2>
-                <p class="description">Plomber</p>
-
-                <a href="Wprofile.php"><button class="button">View More</button></a>
-              </div>
-            </div>
-
-            <div class="card swiper-slide">
-              <div class="image-content">
-                <span class="overlay"></span>
-
-                <div class="card-image">
-                  <img
-                    src="navigi-images/profilePic.svg"
-                    alt=""
-                    class="card-img"
-                  />
-                </div>
-              </div>
-
-              <div class="card-content">
-                <h2 class="name">Amine Kichah</h2>
-                <p class="description">Mechanic</p>
-
-                <a href="Wprofile.php"><button class="button">View More</button></a>
-              </div>
-            </div>
+      <?php
+        }
+        } else {
+          echo "No workers found";
+        }
+      ?>
+  
           </div>
         </div>
 
