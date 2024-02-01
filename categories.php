@@ -100,13 +100,14 @@
             </li>
                   
             <?php if (isset($_SESSION['user_id'])): ?>
-              <img src="navigi-images/profilePic.svg" alt="profile" class="user-pic" onclick="toggleMenu()">
+              <img src="uploads/default.png" alt="profile" class="user-pic" onclick="toggleMenu()">
             <?php endif; ?>
             <div class="drop-menu" id="SubMenu">
               <div class="sub-menu">
                 <div class="user-info">
-                  <img src="navigi-images/profilePic.svg" >
-                  <h2>Youcef Guergour</h2>
+                  <img src= "uploads/default.png">
+                  <!--display users name-->
+                    <h2> <?= $_SESSION['username']; ?> </h2>
                 </div>
                 <hr>
                 <a href="Wprofile.php" class="sub-menu-link">
@@ -162,7 +163,7 @@
             </a>
           </div>
           <div class="col-sm-6 col-md-4 col-lg-3">
-            <a href="categories.php">
+            <a href="categories.php" >
               <div class="box box-electrician category-box">
                 <div class="dark_over"></div>
                 <h6>Electrician</h6>
@@ -178,7 +179,7 @@
             </a>
           </div>
           <div class="col-sm-6 col-md-4 col-lg-3">
-            <a href="categories.php">
+            <a href="categories.php" >
               <div class="box box-painter category-box">
                 <div class="dark_over"></div>
                 <h6>Painter</h6>
@@ -202,10 +203,10 @@
             </a>
           </div>
           <div class="col-sm-6 col-md-4 col-lg-3">
-            <a href="categories.php">
+            <a href="categories.php" >
               <div class="box box-wash-car category-box">
                 <div class="dark_over"></div>
-                <h6>Washing cars</h6>
+                <h6>cleaner</h6>
               </div>
             </a>
           </div>
@@ -275,5 +276,6 @@
     <script src="js/bootstrap.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
     <script src="js/custom.js"></script>
+    <script src="js/showcat.js"></script>
   </body>
 </html>

@@ -2,7 +2,7 @@
 include('db.php');
 session_start();
 
-$cat_name = test_input($_POST['cat_name']);
+ $cat_name = $_POST['cat_name'];
 
 function filter_cat($cat_name) {
     global $conn;

@@ -23,6 +23,8 @@
 
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+  <link rel="stylesheet" type="text/css" href="css/sidebar.css" />
+
 
   <!-- Custom styles for this template -->
   <link href="css/style.css" rel="stylesheet" />
@@ -83,13 +85,14 @@
           </li>
 
           <?php if (isset($_SESSION['user_id'])): ?>
-              <img src="navigi-images/profilePic.svg" alt="profile" class="user-pic" onclick="toggleMenu()">
+              <img src="uploads/default.png" alt="profile" class="user-pic" onclick="toggleMenu()">
             <?php endif; ?>
             <div class="drop-menu" id="SubMenu">
               <div class="sub-menu">
                 <div class="user-info">
-                  <img src="navigi-images/profilePic.svg" >
-                  <h2>Youcef Guergour</h2>
+                  <img src= "uploads/default.png">
+                  <!--display users name-->
+                    <h2> <?= $_SESSION['username']; ?> </h2>
                 </div>
                 <hr>
                 <a href="Wprofile.php" class="sub-menu-link">
@@ -114,6 +117,38 @@
   <!-- end hero area -->
 
   <!-- workers section -->
+  <div class="container-side">
+  <aside>
+        <div class="side-upper">
+          <div class="profile">
+            <div class="profile-pic">
+              <img src="navigi-images/amine.png" alt="" />
+            </div>
+            <div class="name">Arthur Leywin</div>
+          </div>
+          <div class="search active">
+            <i class="bx bx-search"></i>
+            <div class="divider"></div>
+            <p class="responsive">Search</p>
+          </div>
+          <!-- <div class="messages">
+          <i class="bx bxs-message-square-dots"></i>
+          <div class="divider"></div>
+          <p class="responsive">Messages</p>
+        </div> -->
+          <div class="saved">
+            <i class="bx bx-bookmark"></i>
+            <div class="divider"></div>
+            <p class="responsive">favorites</p>
+          </div>
+        </div>
+        <div class="log-out" onclick="logout()">
+          <i class="bx bx-log-out"></i>
+          <div class="divider"></div>
+          <p class="responsive">Log out</p>
+        </div>
+      </aside>
+
 
   <section class="shop_section layout_padding">
     
@@ -133,6 +168,7 @@
         if($check_workers){
           while($row = mysqli_fetch_assoc($query_run)){
       ?>
+            <div class="worker-profile">
             <div class="col-12 col-sm-6 col-md-4 col-lg-3">
               <div class="our-team">
                 <div class="picture">
@@ -155,7 +191,10 @@
       ?>
     </div>
     </div>
+    </div>
   </section>
+  </div>
+
   <!-- end workers section -->
 
 

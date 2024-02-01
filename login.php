@@ -82,13 +82,14 @@
             </li>
                   
             <?php if (isset($_SESSION['user_id'])): ?>
-              <img src="navigi-images/profilePic.svg" alt="profile" class="user-pic" onclick="toggleMenu()">
+              <img src="uploads/default.png" alt="profile" class="user-pic" onclick="toggleMenu()">
             <?php endif; ?>
             <div class="drop-menu" id="SubMenu">
               <div class="sub-menu">
                 <div class="user-info">
-                  <img src="navigi-images/profilePic.svg" >
-                  <h2>Youcef Guergour</h2>
+                  <img src= "uploads/default.png">
+                  <!--display users name-->
+                    <h2> <?= $_SESSION['username']; ?> </h2>
                 </div>
                 <hr>
                 <a href="Wprofile.php" class="sub-menu-link">
