@@ -117,47 +117,16 @@
   <!-- end hero area -->
 
   <!-- workers section -->
-  <div class="container-side">
-  <aside>
-        <div class="side-upper">
-          <div class="profile">
-            <div class="profile-pic">
-              <img src="navigi-images/amine.png" alt="" />
-            </div>
-            <div class="name">Arthur Leywin</div>
-          </div>
-          <div class="search active">
-            <i class="bx bx-search"></i>
-            <div class="divider"></div>
-            <p class="responsive">Search</p>
-          </div>
-          <!-- <div class="messages">
-          <i class="bx bxs-message-square-dots"></i>
-          <div class="divider"></div>
-          <p class="responsive">Messages</p>
-        </div> -->
-          <div class="saved">
-            <i class="bx bx-bookmark"></i>
-            <div class="divider"></div>
-            <p class="responsive">favorites</p>
-          </div>
-        </div>
-        <div class="log-out" onclick="logout()">
-          <i class="bx bx-log-out"></i>
-          <div class="divider"></div>
-          <p class="responsive">Log out</p>
-        </div>
-      </aside>
+<section class="shop_section layout_padding">
 
-
-  <section class="shop_section layout_padding">
-    
     <div class="container">
       <div class="heading_container heading_center">
         <h2 class="secondary-color">Our Workers</h2>
       </div>
+
+    
       
-    <div class="row">
+    <div class="row justify-content-md-center">
       <?php 
         require 'php/db.php';
         $query = "SELECT workers.first_name, workers.last_name, category.cat_name 
@@ -168,7 +137,7 @@
         if($check_workers){
           while($row = mysqli_fetch_assoc($query_run)){
       ?>
-            <div class="worker-profile">
+          
             <div class="col-12 col-sm-6 col-md-4 col-lg-3">
               <div class="our-team">
                 <div class="picture">
@@ -179,7 +148,9 @@
                   <h4 class="title"><?php echo $row['cat_name'] ?></h4>
                 </div>
                 <ul class="social">
-                  <a href="categories.php">Make Offer</a>
+                  <button type="button" class="btn text-white" data-toggle="modal" data-target="#exampleModalCenter">
+                    Make an Offer
+                  </button>
                 </ul>
               </div>
             </div>
@@ -192,8 +163,43 @@
     </div>
     </div>
     </div>
-  </section>
-  </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Offer Form</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+
+            <form action="///" onsubmit="return validateoffer()">
+
+            <div class="form-group">
+              <label for="offer-desc">Offer description</label>
+              <textarea rows="6" name="offer-desc" id="offer" class="form-control" placeholder="Describe your offer here ..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleInputPassword1">Budget (DA) </label>
+              <input type="number" class="form-control" placeholder="Budget here ...">
+            </div>
+
+            <div class="modal-foot">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Submit offer</button>
+            </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</section>
 
   <!-- end workers section -->
 

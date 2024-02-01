@@ -119,6 +119,11 @@ else if (isset($_GET['join_as_worker']) && isset($_SESSION['user_id'])) {
                   <p>Your Profile</p>
                   <span>></span>
                 </a>
+                <a href="offer.php" class="sub-menu-link">
+                  <img src="navigi-images/profile.png" >
+                  <p>Offers</p>
+                  <span>></span>
+                </a>
                 <a href="php/logout.php" class="sub-menu-link">
                   <img src="navigi-images/logout.png" >
                   <p>Logout</p>
@@ -280,7 +285,7 @@ else if (isset($_GET['join_as_worker']) && isset($_SESSION['user_id'])) {
               $rows[] = $row;
           }
 
-          for($i = 0; $i < 5; $i++){
+          for($i = 0; $i < 3; $i++){
           ?>
               <div class="card swiper-slide">
                   <div class="image-content">
@@ -288,7 +293,7 @@ else if (isset($_GET['join_as_worker']) && isset($_SESSION['user_id'])) {
 
                       <div class="card-image">
                           <img
-                              src="navigi-images/profilePic.svg"
+                              src="navigi-images/amine.png"
                               alt=""
                               class="card-img"
                           />
@@ -298,8 +303,6 @@ else if (isset($_GET['join_as_worker']) && isset($_SESSION['user_id'])) {
                   <div class="card-content">
                       <h2 class="name"> <?php echo $rows[$i]['first_name']." ". $rows[$i]['last_name']; ?> </h2>
                       <p class="description"> <?php echo $rows[$i]['cat_name'] ?> </p>
-
-                      <a href="Wprofile.php"><button class="button">View More</button></a>
                   </div>
 
               </div>
