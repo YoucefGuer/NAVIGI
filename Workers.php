@@ -100,13 +100,18 @@
                     data-worker-id="<?php echo $row['worker_id']; ?>">
                     Make an Offer
                   </button>
-                  <form action="Wprofile.php" method="post">
+                  <form action="searchProfile.php" method="post">
                     <button type="submit" class="btn text-white btn-sm" >
+                      <?php 
+                      $_SESSION['searchWorker_id'] = $row['worker_id'];
+                      ?>
                       See Profile
                     </button>
                   </form>
                 </ul>
-                <?php }
+                <?php 
+                
+              }
                 else { ?>
                   <ul class="social">
                     <a href="login.php">Login to make an offer</a>
