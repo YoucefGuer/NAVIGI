@@ -64,8 +64,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['offerId'])) {
 
     // Respond with a success message or any other relevant data
     echo json_encode(['status' => 'success', 'message' => 'Offer deleted successfully']);
-} else {
-    // Respond with an error message if 'offerId' is not provided
-    echo json_encode(['status' => 'error', 'message' => 'OfferId not provided']);
 }
 ?>

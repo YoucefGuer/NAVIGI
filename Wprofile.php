@@ -2,33 +2,7 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-  <!-- Basic -->
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <!-- Mobile Metas -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <!-- Site Metas -->
-  <meta name="keywords" content="" />
-  <meta name="description" content="" />
-  <meta name="author" content="" />
-  <link rel="shortcut icon" href="navigi-images/favicon.png" type="image/x-icon" >
-
-  <title>
-    NAVIGI
-  </title>
-
-  <!-- slider stylesheet -->
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
-
-  <!-- bootstrap core css -->
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
-
-  <!-- Custom styles for this template -->
-  <link href="css/style.css" rel="stylesheet" />
-  <!-- responsive style -->
-  <link href="css/responsive.css" rel="stylesheet" />
-</head>
+<?php include 'mainPartsCode/head.php'; ?>
 
 <body>
   <div class="hero_area">
@@ -72,44 +46,8 @@
           </ul>
 
           
-          <li class="nav-item" id="login-nav">
-            <div class="user_option">
-              <?php if (!isset($_SESSION['user_id'])): ?>
-              <a class="nav-link" href="login.php">
-                <i class="fa fa-user" aria-hidden="true"></i>
-                Account</a>
-          <?php endif; ?>
-              
-            </div>
-          </li>
+          <?php include 'mainPartsCode/profileIcon.php' ?>
 
-          <?php if (isset($_SESSION['user_id'])): ?>
-              <img src="uploads/default.png" alt="profile" class="user-pic" onclick="toggleMenu()">
-            <?php endif; ?>
-            <div class="drop-menu" id="SubMenu">
-              <div class="sub-menu">
-                <div class="user-info">
-                  <img src= "uploads/default.png">
-                  <!--display users name-->
-                    <h2> <?= $_SESSION['username']; ?> </h2>
-                </div>
-                <hr>
-                <a href="Wprofile.php" class="sub-menu-link">
-                  <img src="navigi-images/profile.png" >
-                  <p>Your Profile</p>
-                  <span>></span>
-                </a>
-                <a href="php/logout.php" class="sub-menu-link">
-                  <img src="navigi-images/logout.png" >
-                  <p>Logout</p>
-                  <span>></span>
-                </a>
-              </div>
-            </div>
-
-          </div>
-        </nav>
-    </header>
     <!-- end header section -->
 
   </div>
@@ -117,7 +55,19 @@
 <div class="container3">
     
     <div class="About">
-        <div class="elements">
+
+    <?php 
+      if (isset($_SESSION['successEdit'])) {
+        echo "<div class='alert alert-success'>".$_SESSION['successEdit']."</div>";
+        unset($_SESSION['successEdit']);
+      }
+      if (isset($_SESSION['errorEdit'])) {
+        echo "<div class='alert alert-danger'>".$_SESSION['errorEdit']."</div>";
+        unset($_SESSION['errorEdit']);
+      }
+      ?>
+
+        <div class="elements rounded">
             <div class="class-body">
                 <h1 class="m-3 pt-3">About</h1>
                 <img src= "uploads/default.png" id="profilePicCard">
@@ -158,7 +108,14 @@
                     </div>
                 </div>
             </div>
+            <div class="d-flex justify-content-end">
+              <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#editProfile">
+                Edit Your Profile
+              </button>
+            </div>
         </div>
+
+        <?php if($_SESSION['is_worker'] == 1) { ?>
         <div class="fot">
             <h1 class="m-3">Recent Projects</h1>
             <div class="card-body">
@@ -166,65 +123,82 @@
                 Project Description
             </div>
         </div>
+        <?php } ?>
     </div>
 </div>
 </div>
 
-    <!-- info section -->
+<!-- Modal -->
+<div class="modal fade" id="editProfile" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Edit Your Profile</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+        <form action="php/editProfile.php" method="post">
 
-    <section class="info_section  layout_padding2-top">
-        <div class="info_container ">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-6 col-lg-4">
-                <h6>
-                  ABOUT US
-                </h6>
-                <p>
-                  We are students from ENSIA. Our mission at Navigi is to connect you with skilled professionals, providing top-notch services tailored to your needs.
-                </p>
-              </div>
-              <div class="col-md-6 col-lg-4">
-                <h6>
-                  CONTACT US
-                </h6>
-                <div class="info_link-box">
-                  <a href="">
-                    <i class="fa fa-phone" aria-hidden="true"></i>
-                    <span>+213698781328</span>
-                  </a>
-                  <a href="mailto:youcefguer7@gmail.com">
-                    <i class="fa fa-envelope" aria-hidden="true"></i>
-                    <span>NAVIGI@ensia.edu.dz</span>
-                  </a>
-                </div>
-              </div>
-              <div class="col-md-6 col-lg-4">
-                <h6>
-                  NEED HELP
-                </h6>
-                <p>
-                  Have questions or need assistance? Our dedicated support team at Navigi is here to help. Feel free to reach out anytime for prompt assistance.
-                </p>
-              </div>
-              
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="firstName">First Name</label>
+              <input type="text" class="form-control" name="first_name" id="firstName" value="<?= $_SESSION['first_name'] ?>" required>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="lastName">Last Name</label>
+              <input type="text" class="form-control" name="last_name" id="lastName" value="<?= $_SESSION['last_name'] ?>" required>
             </div>
           </div>
-        </div>
-        <!-- footer section -->
-        <footer class=" footer_section">
-          <div class="container">
-            <p>
-              &copy; <span id="displayYear"></span> All Rights Reserved By
-              <a href="index.php">NAVIGI</a>
-            </p>
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="email">Email</label>
+              <input type="email" class="form-control" id="email" name="email" value="<?= $_SESSION['email'] ?>" required>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="phone">Phone</label>
+              <input type="text" class="form-control" id="phone" name="phone" value="<?= $_SESSION['phone'] ?>" required>
+            </div>
           </div>
-        </footer>
-        <!-- end of footer -->
-    
-      </section>
-    
-      <!-- end info section -->
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="address">Address</label>
+              <input type="text" class="form-control" id="address" name="address" value="<?= $_SESSION['address'] ?>" required>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="city">City</label>
+              <input type="text" class="form-control" id="city" name="city" value="<?= $_SESSION['city'] ?>" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="wilaya">Wilaya</label>
+              <input type="text" class="form-control" id="wilaya" name="wilaya" value="<?= $_SESSION['wilaya'] ?>" required>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="age">Age</label>
+              <input type="text" class="form-control" id="age" name="age" value="<?= $_SESSION['age'] ?>" required>
+            </div>
+          </div>
+
+          
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+          </div>
+          <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+<?php include 'mainPartsCode/footer.php'; ?>
   
       <script src="js/jquery-3.4.1.min.js"></script>
       <script src="js/bootstrap.js"></script>

@@ -9,10 +9,11 @@ header("Access-Control-Allow-Headers: Content-Type");
 session_start();
 include 'db.php';
 
+$email = test_input($_POST['email']);
+$password = test_input($_POST['password']);
+
 // Ensure this is a POST request
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $email = test_input($_POST['email']);
-    $password = test_input($_POST['password']);
 
     // Use a prepared statement to prevent SQL injection
     $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
@@ -40,10 +41,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $_SESSION['is_worker'] = true;
                 $_SESSION['first_name'] = $row['first_name'];
                 $_SESSION['last_name'] = $row['last_name'];
-                $_SESSION['phone'] = "+213" . $row['phone'];
+                $_SESSION['phone'] = "0" . $row['phone'];
                 $_SESSION['address'] = $row['adress'];
                 $_SESSION['city'] = $row['city'];
                 $_SESSION['email'] = $email;
+                $_SESSION['worker_id'] = $row['worker_id'];
+                $_SESSION['wilaya'] = $row['wilaya'];
+                $_SESSION['age'] = $row['age'];
             }
             else {
                 $_SESSION['first_name'] = $_SESSION['username'];
@@ -52,6 +56,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $_SESSION['address'] = "NOT SET YET";
                 $_SESSION['city'] = "";
                 $_SESSION['email'] = $email;
+                $_SESSION['wilaya'] = "";
+                $_SESSION['age'] = "";
             }
             // create array of workers and fill it from database
 
