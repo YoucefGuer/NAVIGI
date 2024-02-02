@@ -32,6 +32,11 @@
                   <span>></span>
                 </a>
                 <?php endif; ?>
+                <a href="project.php" class="sub-menu-link">
+                  <img src="navigi-images/project.png" >
+                  <p>Projects</p>
+                  <span>></span>
+                </a>
                 <a href="php/logout.php" class="sub-menu-link">
                   <img src="navigi-images/logout.png" >
                   <p>Logout</p>

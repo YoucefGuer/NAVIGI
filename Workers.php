@@ -95,11 +95,16 @@
 
                 <?php if (isset($_SESSION['user_id'])) { ?>
                 <ul class="social">
-                  <button type="button" class="btn text-white" 
+                  <button type="button" class="btn text-white btn-sm" 
                     data-toggle="modal" data-target="#exampleModalCenter" 
                     data-worker-id="<?php echo $row['worker_id']; ?>">
                     Make an Offer
                   </button>
+                  <form action="Wprofile.php" method="post">
+                    <button type="submit" class="btn text-white btn-sm" >
+                      See Profile
+                    </button>
+                  </form>
                 </ul>
                 <?php }
                 else { ?>

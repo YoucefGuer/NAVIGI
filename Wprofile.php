@@ -118,10 +118,23 @@
         <?php if($_SESSION['is_worker'] == 1) { ?>
         <div class="fot">
             <h1 class="m-3">Recent Projects</h1>
-            <div class="card-body">
-                <h5>Project Name</h5>
-                Project Description
-            </div>
+            <div id="table-styleaa">
+            <table class="table table-bordered table-hover">
+                <thead class="thead-dark">
+                 
+                    <th>User</th>
+                    <th>budget</th>
+                    <th>rating /5</th>
+
+                </thead>
+                        <tr>
+                            
+                            <td>User1</td>
+                            <td>10000</td>
+                            <td>5</td>
+                        </tr>
+            </table>
+        </div>
         </div>
         <?php } ?>
     </div>
