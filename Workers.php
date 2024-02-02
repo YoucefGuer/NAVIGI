@@ -23,7 +23,7 @@
 
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
-  <link rel="stylesheet" type="text/css" href="css/sidebar.css" />
+
 
 
   <!-- Custom styles for this template -->
@@ -129,7 +129,7 @@
     <div class="row justify-content-md-center">
       <?php 
         require 'php/db.php';
-        $query = "SELECT workers.first_name, workers.last_name, category.cat_name 
+        $query = "SELECT workers.worker_id, workers.first_name, workers.last_name, category.cat_name 
         FROM workers
         JOIN category ON workers.cat_id = category.cat_id";
         $query_run = mysqli_query($conn, $query);
@@ -148,9 +148,9 @@
                   <h4 class="title"><?php echo $row['cat_name'] ?></h4>
                 </div>
                 <ul class="social">
-                  <button type="button" class="btn text-white" data-toggle="modal" data-target="#exampleModalCenter">
-                    Make an Offer
-                  </button>
+                <button type="button" class="btn text-white" data-toggle="modal" data-target="#exampleModalCenter" data-worker-id="<?php echo $row['worker_id']; ?>">
+   Make an Offer
+</button>
                 </ul>
               </div>
             </div>
@@ -177,8 +177,8 @@
           </div>
           <div class="modal-body">
 
-            <form action="///" onsubmit="return validateoffer()">
-
+            <form action="php/offers.php" method="POST">
+            <input type="hidden" name="worker_id" value="">
             <div class="form-group">
               <label for="offer-desc">Offer description</label>
               <textarea rows="6" name="offer-desc" id="offer" class="form-control" placeholder="Describe your offer here ..."></textarea>
@@ -186,7 +186,7 @@
 
             <div class="form-group">
               <label for="exampleInputPassword1">Budget (DA) </label>
-              <input type="number" class="form-control" placeholder="Budget here ...">
+              <input type="number" name="budget" class="form-control" placeholder="Budget here ...">
             </div>
 
             <div class="modal-foot">
@@ -268,6 +268,14 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
   </script>
   <script src="js/custom.js"></script>
+  <script>
+    $('#exampleModalCenter').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Button that triggered the modal
+        var worker_id = button.data('worker-id'); // Extract info from data-* attributes
+        var modal = $(this);
+        modal.find('input[name="worker_id"]').val(worker_id);
+    });
+</script>
 
 </body>
 

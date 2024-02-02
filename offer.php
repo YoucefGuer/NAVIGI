@@ -108,59 +108,52 @@
       </header>
       <!-- end header section -->
 
-    <section class="layout_padding">
-        <div class="container">
-                <div class="heading_container heading_center">
-                    <h2 class="secondary-color">Your Offers</h2>
-                </div>
+      <?php
+require 'php/db.php';
+require 'php/offershow.php';
 
-            <div id="table-styleaa">
-                <table class="table table-bordered table-hover ">
-                    <thead class="thead-dark">
-                        <th>username</th>
-                        <th>description</th>
-                        <th>budget</th>
-                        <th>phone</th>
-                        <th>location</th>
-                        <th>decision</th>
-                    </thead>
-                    <tr>
-                        <td>user1</td>
-                        <td>description1</td>
-                        <td>budget1</td>
-                        <td>phone</td>
-                        <td>location1</td>
-                        <td>
-                            <button class="btn bg-success text-white">accept</button>
-                            <button class="btn bg-danger text-white">refuse</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>user2</td>
-                        <td>description2</td>
-                        <td>budget2</td>
-                        <td>phone</td>
-                        <td>location2</td>
-                        <td>
-                            <button class="btn bg-success text-white">accept</button>
-                            <button class="btn bg-danger text-white">refuse</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>user3</td>
-                        <td>description3</td>
-                        <td>budget3</td>
-                        <td>phone</td>
-                        <td>location3</td>
-                        <td>
-                            <button class="btn bg-success text-white">accept</button>
-                            <button class="btn bg-danger text-white ">refuse</button>
-                        </td>
-                    </tr>
-                </table>
-            </div>
+$offerHandler = new OfferHandler($conn);
+$offers = $offerHandler->getOffers();
+?>
+
+<section class="layout_padding">
+    <div class="container">
+        <div class="heading_container heading_center">
+            <h2 class="secondary-color">Your Offers</h2>
         </div>
-    </section>
+
+        <div id="table-styleaa">
+            <table class="table table-bordered table-hover">
+                <thead class="thead-dark">
+                 
+                    <th>description</th>
+                    <th>budget</th>
+                    
+                    <th>decision</th>
+                </thead>
+                <?php
+                if (!empty($offers)) {
+                    foreach ($offers as $offer) {
+                ?>
+                        <tr>
+                            
+                            <td><?php echo $offer['descr']; ?></td>
+                            <td><?php echo $offer['budget']; ?></td>
+                            <td>
+                                <button class="btn bg-success text-white" >accept</button>
+                                <button class="btn bg-danger text-white refuse-btn"  id ="refuse" data-offer-id="<?php echo $offer['offer_id']; ?>">refuse</button>
+                            </td>
+                        </tr>
+                <?php
+                    }
+                } else {
+                    echo "<tr><td colspan='6'>No offers found</td></tr>";
+                }
+                ?>
+            </table>
+        </div>
+    </div>
+</section>
 
         <!-- info section -->
 
@@ -209,11 +202,30 @@
   </section>
 
   <!-- end info section -->
+  <script >
+    let refused = document.getElementById('refuse');
+    refused.addEventListener('click', function(){
+        console.log('refused');
+        let offerId = refused.getAttribute('data-offer-id');
+   
+        console.log(offerId);
+        fetch('php/offershow.php', { 
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ offerId: offerId }),
+        })
+    });
+    
+
+  </script>
   <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
     <script src="js/custom.js"></script>
     <script src="js/check.js"></script>
+
   
   </body>
 </html>
