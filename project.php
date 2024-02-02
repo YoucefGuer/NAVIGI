@@ -61,9 +61,12 @@
 
 require 'php/db.php';
 require 'php/offershow.php';
-
+session_start();
 $offerHandler = new OfferHandler($conn);
-$offers = $offerHandler->getOffers();
+
+$userId = $_SESSION['user_id'];
+$projects = $offerHandler->getPendingProjects($userId);
+
 ?>
 
 <section class="layout_padding">
@@ -75,25 +78,60 @@ $offers = $offerHandler->getOffers();
         <div id="table-styleaa">
             <table class="table table-bordered table-hover">
                 <thead class="thead-dark">
-                 
                     <th>Worker</th>
-                    <th>budget</th>
-                    <th>status</th>
-
+                    <th>worker phone </th>
+                    <th>Budget</th>
+                    <th>Status</th>
                 </thead>
+                <?php
+                if (!empty($projects)) {
+                    foreach ($projects as $project) {
+                ?>
                         <tr>
-                            
-                            <td>Worker1</td>
-                            <td>10000</td>
+                            <td><?php echo $project['first_name'] . " " .$project['last_name']; ?></td>
+                            <td><?php echo $project['phone']; ?></td>
+                            <td><?php echo $project['budget']; ?></td>
                             <td>
-                                <button class="btn bg-success text-white" >Done</button>
-                                <button class="btn bg-danger text-white" >Cancel</button>
+                                <button class="btn bg-success text-white accept-btn" onclick="updateProjectStatus(<?php echo $project['project_id']; ?>, 'done')">Done</button>
+                                <button class="btn bg-danger text-white refuse-btn" onclick="updateProjectStatus(<?php echo $project['project_id']; ?>, 'cancelled')">Cancel</button>
                             </td>
                         </tr>
+                <?php
+                    }
+                } else {
+                    echo "<tr><td colspan='3'>No Projects found</td></tr>";
+                }
+                ?>
             </table>
         </div>
     </div>
+    <script>
+    function updateProjectStatus(projectId, status) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'php/updateProjectStatus.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    // Handle the success response
+                    console.log(xhr.responseText);
+                    location.reload();
+                    // Optionally, you can update the UI or perform other actions based on the response
+                } else {
+                    // Handle errors
+                    console.error('Error updating project status');
+                }
+            }
+        };
+
+        // Send the request with projectId and status as parameters
+        xhr.send('projectId=' + projectId + '&status=' + status);
+    }
+</script>
+
 </section>
+
 
 <?php include 'mainPartsCode/footer.php'; ?>
 

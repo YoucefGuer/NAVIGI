@@ -24,7 +24,7 @@ class OfferHandler
         mysqli_stmt_close($workerIdStmt);
 
         // Use the obtained worker_id in the main query
-        $query = "SELECT * FROM offers WHERE worker_id = ?";
+        $query = "SELECT * FROM offers WHERE worker_id = ? AND off_status = 'pending'";
         $stmt = mysqli_prepare($this->conn, $query);
         mysqli_stmt_bind_param($stmt, "i", $worker_id);
         mysqli_stmt_execute($stmt);
@@ -41,6 +41,56 @@ class OfferHandler
 
         return $offers;
     }
+//     public function getPendingProjects($user_id)
+// {
+//     $query = "SELECT * FROM project WHERE user_id = ? AND p_status = 'pending'";
+//     $stmt = mysqli_prepare($this->conn, $query);
+//     mysqli_stmt_bind_param($stmt, "i", $user_id);
+//     mysqli_stmt_execute($stmt);
+
+//     $result = mysqli_stmt_get_result($stmt);
+
+//     $projects = [];
+
+//     while ($row = mysqli_fetch_assoc($result)) {
+//         $projects[] = $row;
+//     }
+
+//     mysqli_stmt_close($stmt);
+
+//     return $projects;
+// }
+public function getPendingProjects($user_id)
+{
+    $query = "SELECT project.*, workers.first_name, workers.last_name, workers.phone
+              FROM project
+              JOIN workers ON project.worker_id = workers.worker_id
+              WHERE project.user_id = ? AND project.p_status = 'pending'";
+
+    $stmt = mysqli_prepare($this->conn, $query);
+
+    if ($stmt) {
+        mysqli_stmt_bind_param($stmt, "i", $user_id);
+        mysqli_stmt_execute($stmt);
+
+        $result = mysqli_stmt_get_result($stmt);
+
+        $projects = [];
+
+        while ($row = mysqli_fetch_assoc($result)) {
+            $projects[] = $row;
+        }
+
+        mysqli_stmt_close($stmt);
+
+        return $projects;
+    } else {
+        // Log the error
+        error_log('Error preparing statement: ' . mysqli_error($this->conn));
+        return []; // Return an empty array or handle the error accordingly
+    }
+}
+
  
     public function deleteOffer($offer_id)
     {

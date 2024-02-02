@@ -74,10 +74,8 @@ $offers = $offerHandler->getOffers();
         <div id="table-styleaa">
             <table class="table table-bordered table-hover">
                 <thead class="thead-dark">
-                 
                     <th>description</th>
                     <th>budget</th>
-                    
                     <th>decision</th>
                 </thead>
                 <?php
@@ -85,12 +83,11 @@ $offers = $offerHandler->getOffers();
                     foreach ($offers as $offer) {
                 ?>
                         <tr>
-                            
                             <td><?php echo $offer['descr']; ?></td>
                             <td><?php echo $offer['budget']; ?></td>
                             <td>
-                                <button class="btn bg-success text-white" >accept</button>
-                                <button class="btn bg-danger text-white refuse-btn"  id ="refuse" data-offer-id="<?php echo $offer['offer_id']; ?>">refuse</button>
+                                <button class="btn bg-success text-white accept-btn" onclick="updateOfferStatus(<?php echo $offer['offer_id']; ?>, 'accepted')">accept</button>
+                                <button class="btn bg-danger text-white refuse-btn" onclick="updateOfferStatus(<?php echo $offer['offer_id']; ?>, 'refused')">refuse</button>
                             </td>
                         </tr>
                 <?php
@@ -102,28 +99,36 @@ $offers = $offerHandler->getOffers();
             </table>
         </div>
     </div>
+
+    <script>
+    function updateOfferStatus(offerId, status) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'php/updateOfferStatus.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    // Handle the success response
+                    console.log(xhr.responseText);
+                    location.reload();
+                    // Optionally, you can update the UI or perform other actions based on the response
+                } else {
+                    // Handle errors
+                    console.error('Error updating offer status');
+                }
+            }
+        };
+
+        // Send the request with offerId and status as parameters
+        xhr.send('offerId=' + offerId + '&status=' + status);
+    }
+</script>
 </section>
 
 <?php include 'mainPartsCode/footer.php'; ?>
 
-  <script >
-    let refused = document.getElementById('refuse');
-    refused.addEventListener('click', function(){
-        console.log('refused');
-        let offerId = refused.getAttribute('data-offer-id');
-   
-        console.log(offerId);
-        fetch('php/offershow.php', { 
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ offerId: offerId }),
-        })
-    });
-    
-
-  </script>
+  
   <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>

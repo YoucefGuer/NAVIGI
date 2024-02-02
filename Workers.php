@@ -101,13 +101,12 @@
                     Make an Offer
                   </button>
                   <form action="searchProfile.php" method="post">
-                    <button type="submit" class="btn text-white btn-sm" >
-                      <?php 
-                      $_SESSION['searchWorker_id'] = $row['worker_id'];
-                      ?>
-                      See Profile
-                    </button>
-                  </form>
+  <input type="hidden" name="searchWorker_id" value="<?php echo $row['worker_id']; ?>">
+  <button type="submit" class="btn text-white btn-sm">
+    See Profile
+  </button>
+</form>
+
                 </ul>
                 <?php 
                 

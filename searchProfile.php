@@ -60,7 +60,10 @@
     if ($_SERVER["REQUEST_METHOD"] === "POST"){
         include 'php/db.php';
         $worker_id = $_POST['searchWorker_id'];
-        $sql = "SELECT * FROM workers WHERE worker_id = $worker_id";
+        $sql = "SELECT workers.*, users.email
+        FROM workers
+        INNER JOIN users ON workers.user_id = users.user_id
+        WHERE workers.worker_id = $worker_id";
         $result = mysqli_query($conn, $sql);
         
         $row = mysqli_fetch_assoc($result);
