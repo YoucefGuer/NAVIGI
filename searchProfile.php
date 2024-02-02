@@ -57,9 +57,9 @@
     <div class="About">
 
     <?php
-    if (isset($_SESSION['searchWorker_id'])){
+    if ($_SERVER["REQUEST_METHOD"] === "POST"){
         include 'php/db.php';
-        $worker_id = $_SESSION['searchWorker_id'];
+        $worker_id = $_POST['searchWorker_id'];
         $sql = "SELECT * FROM workers WHERE worker_id = $worker_id";
         $result = mysqli_query($conn, $sql);
         
