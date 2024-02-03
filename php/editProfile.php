@@ -3,6 +3,7 @@ include 'db.php';
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST"){
+
     $user_id = $_SESSION['user_id'];
     $first_name = test_input($_POST['first_name']);
     $last_name = test_input($_POST['last_name']);
@@ -13,21 +14,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
     $wilaya = test_input($_POST['wilaya']);
     $age = test_input($_POST['age']);
     $password = test_input($_POST['password']);
-    $password = password_hash($password, PASSWORD_DEFAULT);
+    $passworda = password_hash($password, PASSWORD_DEFAULT);
 
     $username = test_input($_POST['username']);
 
-    //check if password is correct
-    $stmt = $conn->prepare("SELECT * FROM users WHERE user_id = ? AND pwd = ?");
-    $stmt->bind_param("is", $user_id, $password);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $stmt->close();
-    if ($result->num_rows === 0) {
-        $_SESSION['errorEdit'] = "Incorrect password.";
-        header("Location: ../Wprofile.php");
-        exit();
-    }
+
 
     // Use a prepared statement to prevent SQL injection
     $stmt = $conn->prepare("UPDATE workers SET first_name = ?, last_name = ?, phone = ?, adress = ?, city = ?, age=?, wilaya=? WHERE user_id = ?");
@@ -42,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
     $result = $stmt->get_result();
     $stmt->close();
     if ($result->num_rows > 0) {
-        $_SESSION['errorEdit'] = "Email already exists.";
+        $_SESSION['error'] = "Email already exists.";
         header("Location: ../Wprofile.php");
         exit();
     }
@@ -54,7 +45,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
     $result = $stmt->get_result();
     $stmt->close();
     if ($result->num_rows > 0) {
-        $_SESSION['errorEdit'] = "Username already exists.";
+        $_SESSION['error'] = "Username already exists.";
+        header("Location: ../Wprofile.php");
+        exit();
+    }
+
+    //check if password is correct
+    $stmt = $conn->prepare("SELECT pwd FROM users WHERE user_id = ?");
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    $stmt->close();
+    if (!password_verify($password, $row['pwd'])) {
+        $_SESSION['error'] = "Incorrect password.";
         header("Location: ../Wprofile.php");
         exit();
     }
@@ -62,11 +66,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
 
 
     // Use a prepared statement to prevent SQL injection
-    $stmt = $conn->prepare("UPDATE users SET email = ? WHERE user_id = ? AND pwd = ?");
-    $stmt->bind_param("sis", $email, $user_id , $password);
+    $stmt = $conn->prepare("UPDATE users SET email = ?, username=? WHERE user_id = ? AND pwd = ?");
+    $stmt->bind_param("ssis", $email,$username, $user_id , $passworda);
     $stmt->execute();
     $stmt->close();
 
+    $_SESSION['username'] = $username;
     $_SESSION['first_name'] = $first_name;
     $_SESSION['last_name'] = $last_name;
     $_SESSION['phone'] = $phone;
@@ -76,12 +81,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
     $_SESSION['age'] = $age;
     $_SESSION['email'] = $email;
 
-    $_SESSION['successEdit'] = "Profile updated successfully.";
+    $_SESSION['success'] = "Profile updated successfully.";
     header("Location: ../Wprofile.php");
     exit();
 }
 else {
-    $_SESSION['errorEdit'] = "Something went wrong, please try again.";
+    $_SESSION['error'] = "Something went wrong, please try again.";
     header("Location: ../Wprofile.php");
     exit();
 }

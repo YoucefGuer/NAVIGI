@@ -81,7 +81,7 @@
     
     <!-- worker profile  -->
   <div class=" information_container container mt-5 mb-5"> 
-    <form action="http://localhost/NAVIGI-FINAL/php/worker.php"  method="POST" enctype="multipart/form-data" >
+    <form action="http://localhost/NAVIGI-FINAL/php/worker.php"  method="POST" enctype="multipart/form-data" onclick="return validateForm()">
     <div class="row ">
 
       <div class="col-md-6 mt-2">

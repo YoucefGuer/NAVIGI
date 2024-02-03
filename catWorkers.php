@@ -83,7 +83,7 @@
                   <div class="our-team">
                       <div class="picture">
                        
-                          <img class="img-fluid" src="navigi-images/worker2.png">
+                          <img class="img-fluid" src="<?php echo $_SESSION['profile_pic'] ?>">
                       </div>
                       <div class="team-content">
                           <h3 class="name"> <?php echo $row['first_name']." ". $row['last_name']; ?> </h3>

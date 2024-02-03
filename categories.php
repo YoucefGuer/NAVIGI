@@ -106,7 +106,7 @@
               </div>
             </a>
           </div>
-          <div class="col-sm-6 col-md-4 col-lg-3">
+          <div class="col-sm-6 col-md-4 col-lg-3 " >
             <a href="categories.php" >
               <div class="box box-painter category-box">
                 <div class="dark_over"></div>

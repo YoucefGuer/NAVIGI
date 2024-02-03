@@ -10,12 +10,13 @@
             </li>
                   
             <?php if (isset($_SESSION['user_id'])): ?>
-              <img src="uploads/default.png" alt="profile" class="user-pic" onclick="toggleMenu()">
+              <img src="<?php echo $_SESSION['profile_pic'] ?>" alt="profile" class="user-pic" onclick="toggleMenu()">
             <?php endif; ?>
+
             <div class="drop-menu" id="SubMenu">
               <div class="sub-menu">
                 <div class="user-info">
-                  <img src= "uploads/default.png">
+                  <img src= "<?php  echo $_SESSION['profile_pic'] ?>">
                   <!--display users name-->
                     <h2> <?= $_SESSION['username']; ?> </h2>
                 </div>

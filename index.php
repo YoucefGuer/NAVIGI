@@ -63,7 +63,7 @@ else if (isset($_GET['join_as_worker']) && isset($_SESSION['user_id'])) {
             </ul>
 
             <?php include 'mainPartsCode/profileIcon.php' ?>
-            
+
       <!-- end header section -->
 
       <!-- information section -->
@@ -107,73 +107,65 @@ else if (isset($_GET['join_as_worker']) && isset($_SESSION['user_id'])) {
         <div class="heading_container heading_center">
           <h2 class="secondary-color">Our Categories</h2>
         </div>
-
         <div class="row">
           <div class="col-sm-6 col-md-4 col-lg-3">
-            <a href="#">
+            <a href="categories.php" >
               <div class="box box-mechanic category-box">
                 <div class="dark_over"></div>
                 <h6>Mechanic</h6>
               </div>
             </a>
           </div>
-
           <div class="col-sm-6 col-md-4 col-lg-3">
-            <a href="#">
+            <a href="categories.php">
               <div class="box box-welder category-box">
                 <div class="dark_over"></div>
                 <h6>Welder</h6>
               </div>
             </a>
           </div>
-
           <div class="col-sm-6 col-md-4 col-lg-3">
-            <a href="#">
+            <a href="categories.php">
               <div class="box box-carpenter category-box">
                 <div class="dark_over"></div>
                 <h6>Carpenter</h6>
               </div>
             </a>
           </div>
-
           <div class="col-sm-6 col-md-4 col-lg-3">
-            <a href="#">
+            <a href="categories.php" >
               <div class="box box-electrician category-box">
                 <div class="dark_over"></div>
                 <h6>Electrician</h6>
               </div>
             </a>
           </div>
-
           <div class="col-sm-6 col-md-4 col-lg-3">
-            <a href="#">
+            <a href="categories.php">
               <div class="box box-plumber category-box">
                 <div class="dark_over"></div>
                 <h6>Plumber</h6>
               </div>
             </a>
           </div>
-
-          <div class="col-sm-6 col-md-4 col-lg-3">
-            <a href="#">
+          <div class="col-sm-6 col-md-4 col-lg-3 " >
+            <a href="categories.php" >
               <div class="box box-painter category-box">
                 <div class="dark_over"></div>
                 <h6>Painter</h6>
               </div>
             </a>
           </div>
-
           <div class="col-sm-6 col-md-4 col-lg-3">
-            <a href="#">
+            <a href="categories.php">
               <div class="box box-mason category-box">
                 <div class="dark_over"></div>
                 <h6>Mason</h6>
               </div>
             </a>
           </div>
-
           <div class="col-sm-6 col-md-4 col-lg-3">
-            <a href="#">
+            <a href="categories.php">
               <div class="box box-tailor category-box">
                 <div class="dark_over"></div>
                 <h6>Tailor</h6>
@@ -182,11 +174,13 @@ else if (isset($_GET['join_as_worker']) && isset($_SESSION['user_id'])) {
           </div>
         </div>
       </div>
-
       <div class="btn-box">
         <a href="categories.php"> See All </a>
       </div>
     </section>
+    </section>
+
+
 
     <!-- end categories section -->
 
@@ -222,7 +216,7 @@ else if (isset($_GET['join_as_worker']) && isset($_SESSION['user_id'])) {
 
                       <div class="card-image">
                           <img
-                              src="navigi-images/amine.png"
+                              src="<?php echo $_SESSION['profile_pic'] ?>"
                               alt=""
                               class="card-img"
                           />
@@ -351,5 +345,6 @@ else if (isset($_GET['join_as_worker']) && isset($_SESSION['user_id'])) {
     <script src="js/swiper-bundle.min.js"></script>
     <!-- JavaScript -->
     <script src="js/script.js"></script>
+    <script src="js/showcat.js"></script>
   </body>
 </html>

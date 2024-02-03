@@ -30,6 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             // Password is correct, set session variables
             $_SESSION['user_id'] = $row['user_id'];
             $_SESSION['username'] = $row['username'];
+            $_SESSION['profile_pic'] = $row['imagePath'];
             // check if this user is a worker
             $stmt = $conn->prepare("SELECT * FROM workers WHERE user_id = ?");
             $stmt->bind_param("i", $_SESSION['user_id']);

@@ -57,20 +57,25 @@
     <div class="About">
 
     <?php 
-      if (isset($_SESSION['successEdit'])) {
-        echo "<div class='alert alert-success'>".$_SESSION['successEdit']."</div>";
-        unset($_SESSION['successEdit']);
+      if (isset($_SESSION['success'])) {
+        echo "<div class='alert alert-success'>".$_SESSION['success']."</div>";
+        unset($_SESSION['success']);
       }
-      if (isset($_SESSION['errorEdit'])) {
-        echo "<div class='alert alert-danger'>".$_SESSION['errorEdit']."</div>";
-        unset($_SESSION['errorEdit']);
+      if (isset($_SESSION['error'])) {
+        echo "<div class='alert alert-danger'>".$_SESSION['error']."</div>";
+        unset($_SESSION['error']);
       }
       ?>
 
         <div class="elements rounded">
             <div class="class-body">
                 <h1 class="m-3 pt-3">About</h1>
-                <img src= "uploads/default.png" id="profilePicCard">
+                <img src="<?php echo $_SESSION['profile_pic'] ?>" id="profilePicCard">
+                <form action="uploadProfilePic.php" method="post" enctype="multipart/form-data">
+                      Upload a profile pic:
+                    <input type="file" name="profilePic" id="profilePic">
+                    <input type="submit" value="Upload Image" name="submit" class="btn btn-secondary">
+                </form>
             </div>
             <div class="card-body">
                 <div class="row1">

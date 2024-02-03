@@ -5,6 +5,7 @@ include 'db.php';
 $username = test_input($_POST['username']);
 $email = test_input($_POST['email']);
 $password = test_input($_POST['password']);
+$imagePath = "uploads/default.jpg";
 
 // Check if the username or email already exists in the database
 $stmt = $conn->prepare("SELECT * FROM users WHERE username = ? OR email = ?");
@@ -19,8 +20,8 @@ if ($result->num_rows > 0) {
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
     // Use a prepared statement to prevent SQL injection
-    $stmt = $conn->prepare("INSERT INTO users (username, email, pwd) VALUES (?, ?, ?)");
-    $stmt->bind_param("sss", $username, $email, $hashed_password);
+    $stmt = $conn->prepare("INSERT INTO users (username, email, pwd, imagePath) VALUES (?, ?, ?,?)");
+    $stmt->bind_param("sss", $username, $email, $hashed_password, $imagePath);
     $stmt->execute();
     
     // Use a prepared statement to prevent SQL injection
