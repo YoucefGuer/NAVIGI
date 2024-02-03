@@ -92,8 +92,12 @@ $projects = $offerHandler->getPendingProjects($userId);
                             <td><?php echo $project['phone']; ?></td>
                             <td><?php echo $project['budget']; ?></td>
                             <td>
-                                <button class="btn bg-success text-white accept-btn" onclick="updateProjectStatus(<?php echo $project['project_id']; ?>, 'done')">Done</button>
-                                <button class="btn bg-danger text-white refuse-btn" onclick="updateProjectStatus(<?php echo $project['project_id']; ?>, 'cancelled')">Cancel</button>
+                                <button class="btn bg-success text-white accept-btn" 
+                                data-toggle="modal" data-target="#giveRating" > Done </button>
+
+                                <button class="btn bg-danger text-white refuse-btn" 
+                                onclick="updateProjectStatus(<?php echo 
+                                $project['project_id']; ?>, 'cancelled')"> Cancel </button>
                             </td>
                         </tr>
                 <?php
@@ -105,8 +109,40 @@ $projects = $offerHandler->getPendingProjects($userId);
             </table>
         </div>
     </div>
+
+
+
+    <!-- Modal -->
+        <div class="modal fade" id="giveRating" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post">
+                    <div class="form-group">
+                        <label for="rating">Rating</label>
+                        <input type="number" class="form-control" id="rating" min="0" max="5" name="rating" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary"                                 
+                        onclick="updateProjectStatus(<?php echo $project['project_id']; ?>, 'done', document.getElementById('rating').value )"
+                        >Give Rating</button>
+                    </div>
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>
+
+
+
     <script>
-    function updateProjectStatus(projectId, status) {
+    function updateProjectStatus(projectId, status, rating) {
         var xhr = new XMLHttpRequest();
         xhr.open('POST', 'php/updateProjectStatus.php', true);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -126,7 +162,7 @@ $projects = $offerHandler->getPendingProjects($userId);
         };
 
         // Send the request with projectId and status as parameters
-        xhr.send('projectId=' + projectId + '&status=' + status);
+        xhr.send('projectId=' + projectId + '&status=' + status + '&rating=' + rating);
     }
 </script>
 

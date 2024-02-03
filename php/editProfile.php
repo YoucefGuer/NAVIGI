@@ -15,14 +15,55 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
     $password = test_input($_POST['password']);
     $password = password_hash($password, PASSWORD_DEFAULT);
 
+    $username = test_input($_POST['username']);
 
+    //check if password is correct
+    $stmt = $conn->prepare("SELECT * FROM users WHERE user_id = ? AND pwd = ?");
+    $stmt->bind_param("is", $user_id, $password);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $stmt->close();
+    if ($result->num_rows === 0) {
+        $_SESSION['errorEdit'] = "Incorrect password.";
+        header("Location: ../Wprofile.php");
+        exit();
+    }
+
+    // Use a prepared statement to prevent SQL injection
     $stmt = $conn->prepare("UPDATE workers SET first_name = ?, last_name = ?, phone = ?, adress = ?, city = ?, age=?, wilaya=? WHERE user_id = ?");
     $stmt->bind_param("sssssisi", $first_name, $last_name, $phone, $address, $city,$age,$wilaya, $user_id);
     $stmt->execute();
     $stmt->close();
 
-    $stmt = $conn->prepare("UPDATE users SET email = ?, pwd = ? WHERE user_id = ?");
-    $stmt->bind_param("ssi", $email, $password, $user_id);
+    //check if email exists
+    $stmt = $conn->prepare("SELECT * FROM users WHERE email = ? AND user_id != ?");
+    $stmt->bind_param("si", $email, $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $stmt->close();
+    if ($result->num_rows > 0) {
+        $_SESSION['errorEdit'] = "Email already exists.";
+        header("Location: ../Wprofile.php");
+        exit();
+    }
+
+    //check if username exists
+    $stmt = $conn->prepare("SELECT * FROM users WHERE username = ? AND user_id != ?");
+    $stmt->bind_param("si", $username, $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $stmt->close();
+    if ($result->num_rows > 0) {
+        $_SESSION['errorEdit'] = "Username already exists.";
+        header("Location: ../Wprofile.php");
+        exit();
+    }
+
+
+
+    // Use a prepared statement to prevent SQL injection
+    $stmt = $conn->prepare("UPDATE users SET email = ? WHERE user_id = ? AND pwd = ?");
+    $stmt->bind_param("sis", $email, $user_id , $password);
     $stmt->execute();
     $stmt->close();
 

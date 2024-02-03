@@ -74,10 +74,30 @@
             </div>
             <div class="card-body">
                 <div class="row1">
+                  <div class="col-md-3">
+                      <h5>Username</h5>
+                  </div>
+                  <div class="col-md-9 text-secondary">
+                      <?= $_SESSION['username']; ?> 
+                  </div>
+                </div>
+                <hr>
+                <div class="row1">
+                    <div class="col-md-3">
+                        <h5>Email</h5>
+                    </div>
+                    <div class="col-md-9 text-secondary">
+                        <?php echo $_SESSION['email']; ?>
+                    </div>
+                </div>
+                <hr>
+
+                <?php if($_SESSION['is_worker'] == 1) { ?>
+                <div class="row1">
                     <div class="col-md-3">
                         <h5>Full Name</h5>
                     </div>
-                    <div class="Name">
+                    <div class="col-md-9 text-secondary">
                         <?= $_SESSION['first_name'] . " " . $_SESSION['last_name']; ?> 
                     </div>
                 </div>
@@ -107,6 +127,7 @@
                         <?php echo $_SESSION['address']. " " .$_SESSION['city'] ?>
                     </div>
                 </div>
+                <?php } ?>
             </div>
             <div class="d-flex justify-content-end">
               <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#editProfile">
@@ -115,7 +136,9 @@
             </div>
         </div>
 
-        <?php if($_SESSION['is_worker'] == 1) { ?>
+
+
+
         <div class="fot">
             <h1 class="m-3">Recent Projects</h1>
             <div id="table-styleaa">
@@ -127,16 +150,27 @@
                     <th>rating /5</th>
 
                 </thead>
+                <?php if($_SESSION['is_worker'] == 1) { 
+                  require 'php/db.php';
+                  $user_id = $_SESSION['worker_id'];
+                  $query = "SELECT * FROM project
+                  join users on project.user_id = users.user_id
+                  WHERE 
+                  worker_id = $user_id
+                  AND p_status = 'done' ";
+                  $query_run = mysqli_query($conn, $query);
+                  while($row = mysqli_fetch_assoc($query_run)){
+                  ?>
                         <tr>
-                            
-                            <td>User1</td>
-                            <td>10000</td>
-                            <td>5</td>
+                            <td><?php echo $row['username'];?></td>
+                            <td><?php echo $row['budget'];  ?></td>
+                            <td><?php echo $row['p_rating'];?></td>
                         </tr>
+                      <?php } }?>
             </table>
+          </div>
         </div>
-        </div>
-        <?php } ?>
+
     </div>
 </div>
 </div>
@@ -152,7 +186,22 @@
         </button>
       </div>
         <form action="php/editProfile.php" method="post">
+        
 
+          <?php if($_SESSION['is_worker'] != 1) { ?>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="username">Username</label>
+              <input type="text" class="form-control" id="username" name="username" value="<?= $_SESSION['username'] ?>" required>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="email">Email</label>
+              <input type="email" class="form-control" id="email" name="email" value="<?= $_SESSION['email'] ?>" required>
+            </div>
+          </div>
+          <?php } ?>
+
+        <?php if($_SESSION['is_worker'] == 1) { ?>
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="firstName">First Name</label>
@@ -196,6 +245,7 @@
               <input type="text" class="form-control" id="age" name="age" value="<?= $_SESSION['age'] ?>" required>
             </div>
           </div>
+        <?php } ?>
 
           
           <div class="form-group">

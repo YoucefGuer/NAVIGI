@@ -67,7 +67,6 @@
         $result = mysqli_query($conn, $sql);
         
         $row = mysqli_fetch_assoc($result);
-        error_reporting(E_ALL); ini_set('display_errors', '1');
     ?>
 
         <div class="elements rounded">
@@ -80,7 +79,7 @@
                     <div class="col-md-3">
                         <h5>Full Name</h5>
                     </div>
-                    <div class="Name">
+                    <div class="col-md-3 text-secondary">
                         <?= $row['first_name'] . " " . $row['last_name']; ?> 
                     </div>
                 </div>
@@ -113,7 +112,8 @@
             </div>
         </div>
 
-        <?php } ?>
+
+
 
         <div class="fot">
             <h1 class="m-3">Recent Projects</h1>
@@ -126,12 +126,22 @@
                     <th>rating /5</th>
 
                 </thead>
+                <?php
+                $user_id = $worker_id;
+                $query = "SELECT * FROM project
+                join users on project.user_id = users.user_id
+                WHERE 
+                worker_id = $user_id
+                AND p_status = 'done' ";
+                $query_run = mysqli_query($conn, $query);
+                while($row = mysqli_fetch_assoc($query_run)){
+                ?>
                         <tr>
-                            
-                            <td>User1</td>
-                            <td>10000</td>
-                            <td>5</td>
+                        <td><?php echo $row['username'];?></td>
+                        <td><?php echo $row['budget'];  ?></td>
+                        <td><?php echo $row['p_rating'];?></td>
                         </tr>
+                        <?php } }?>
             </table>
         </div>
         </div>
